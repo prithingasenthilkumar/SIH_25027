@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regulator Dashboard - AyurTrace</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">🌿 AyurTrace</div>
+            <div class="nav-menu">
+                <a href="index.html">Home</a>
+                <a href="reports.html">Reports</a>
+                <a href="#" onclick="logout()">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="dashboard">
+        <div class="container">
+            <div class="dashboard-header">
+                <h1>Regulator Dashboard</h1>
+                <p>Welcome, <span id="username">Regulator</span> | Role: Supply Chain Oversight</p>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h3>🔍 Supply Chain Monitor</h3>
+                    <div class="monitor-controls">
+                        <div class="form-group">
+                            <label for="monitorType">Monitor Type</label>
+                            <select id="monitorType" onchange="updateMonitorView()">
+                                <option value="realtime">Real-time Activity</option>
+                                <option value="alerts">Active Alerts</option>
+                                <option value="compliance">Compliance Status</option>
+                                <option value="quality">Quality Issues</option>
+                            </select>
+                        </div>
+                        <button class="btn-primary" onclick="refreshMonitor()">Refresh</button>
+                    </div>
+
+                    <div id="monitorContent">
+                        <div class="activity-item alert">
+                            <div class="activity-header">
+                                <span class="activity-type">🚨 Quality Alert</span>
+                                <span class="activity-time">2 hours ago</span>
+                            </div>
+                            <p><strong>NEE-2024-004</strong> - Heavy metal levels exceeded limits</p>
+                            <p>Lab: National Ayurvedic Research Institute</p>
+                            <div class="activity-actions">
+                                <button class="btn-secondary" onclick="investigateAlert('NEE-2024-004')">Investigate</button>
+                                <button class="btn-primary" onclick="viewDetails('NEE-2024-004')">View Details</button>
+                            </div>
+                        </div>
+
+                        <div class="activity-item normal">
+                            <div class="activity-header">
+                                <span class="activity-type">✅ Batch Approved</span>
+                                <span class="activity-time">4 hours ago</span>
+                            </div>
+                            <p><strong>ASH-2024-001</strong> - All tests passed</p>
+                            <p>Manufacturer: Himalaya Wellness</p>
+                        </div>
+
+                        <div class="activity-item warning">
+                            <div class="activity-header">
+                                <span class="activity-type">⚠️ Delayed Testing</span>
+                                <span class="activity-time">6 hours ago</span>
+                            </div>
+                            <p><strong>TUL-2024-005</strong> - Testing overdue by 2 days</p>
+                            <p>Lab: Regional Testing Center</p>
+                            <div class="activity-actions">
+                                <button class="btn-secondary" onclick="sendReminder('TUL-2024-005')">Send Reminder</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>🔎 Provenance Query</h3>
+                    <form id="provenanceQuery">
+                        <div class="form-group">
+                            <label for="queryType">Query Type</label>
+                            <select id="queryType" name="queryType">
+                                <option value="batch">Batch ID</option>
+                                <option value="farmer">Farmer</option>
+                                <option value="processor">Processor</option>
+                                <option value="manufacturer">Manufacturer</option>
+                                <option value="herb">Herb Type</option>
+                                <option value="location">Location</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="queryValue">Search Value</label>
+                            <input type="text" id="queryValue" name="queryValue" placeholder="Enter search term..." required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dateRange">Date Range</label>
+                            <div class="date-range">
+                                <input type="date" id="startDate" name="startDate">
+                                <span>to</span>
+                                <input type="date" id="endDate" name="endDate">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-primary">Search Blockchain</button>
+                    </form>
+
+                    <div id="queryResults" class="hidden">
+                        <h4>Search Results:</h4>
+                        <div id="resultsContainer"></div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>📊 Compliance Overview</h3>
+                    <div class="compliance-metrics">
+                        <div class="metric-card">
+                            <div class="metric-value">94.2%</div>
+                            <div class="metric-label">Overall Compliance</div>
+                            <div class="metric-trend up">+2.1%</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">156</div>
+                            <div class="metric-label">Active Batches</div>
+                            <div class="metric-trend neutral">0%</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">8</div>
+                            <div class="metric-label">Open Alerts</div>
+                            <div class="metric-trend down">-3</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">23</div>
+                            <div class="metric-label">Pending Reviews</div>
+                            <div class="metric-trend up">+5</div>
+                        </div>
+                    </div>
+
+                    <div class="compliance-breakdown">
+                        <h4>Compliance by Category:</h4>
+                        <div class="compliance-item">
+                            <span>Quality Testing</span>
+                            <div class="compliance-bar">
+                                <div class="compliance-fill" style="width: 96%"></div>
+                            </div>
+                            <span>96%</span>
+                        </div>
+                        <div class="compliance-item">
+                            <span>Documentation</span>
+                            <div class="compliance-bar">
+                                <div class="compliance-fill" style="width: 92%"></div>
+                            </div>
+                            <span>92%</span>
+                        </div>
+                        <div class="compliance-item">
+                            <span>Traceability</span>
+                            <div class="compliance-bar">
+                                <div class="compliance-fill" style="width: 98%"></div>
+                            </div>
+                            <span>98%</span>
+                        </div>
+                        <div class="compliance-item">
+                            <span>Sustainability</span>
+                            <div class="compliance-bar">
+                                <div class="compliance-fill" style="width: 89%"></div>
+                            </div>
+                            <span>89%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>📋 Generate Reports</h3>
+                    <form id="reportForm">
+                        <div class="form-group">
+                            <label for="reportType">Report Type</label>
+                            <select id="reportType" name="reportType" required>
+                                <option value="">Select Report Type</option>
+                                <option value="compliance">Compliance Report</option>
+                                <option value="quality">Quality Assurance Report</option>
+                                <option value="traceability">Traceability Audit</option>
+                                <option value="sustainability">Sustainability Report</option>
+                                <option value="supply-chain">Supply Chain Analysis</option>
+                                <option value="custom">Custom Report</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reportPeriod">Report Period</label>
+                            <select id="reportPeriod" name="reportPeriod" required>
+                                <option value="">Select Period</option>
+                                <option value="last-week">Last Week</option>
+                                <option value="last-month">Last Month</option>
+                                <option value="last-quarter">Last Quarter</option>
+                                <option value="last-year">Last Year</option>
+                                <option value="custom">Custom Date Range</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" id="customDateRange" style="display: none;">
+                            <label>Custom Date Range</label>
+                            <div class="date-range">
+                                <input type="date" id="reportStartDate" name="reportStartDate">
+                                <span>to</span>
+                                <input type="date" id="reportEndDate" name="reportEndDate">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reportFormat">Export Format</label>
+                            <select id="reportFormat" name="reportFormat" required>
+                                <option value="pdf">PDF</option>
+                                <option value="excel">Excel</option>
+                                <option value="csv">CSV</option>
+                                <option value="json">JSON</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="includeCharts">Include Charts</label>
+                            <input type="checkbox" id="includeCharts" name="includeCharts" checked>
+                        </div>
+
+                        <button type="submit" class="btn-primary">Generate Report</button>
+                    </form>
+
+                    <div id="reportStatus" class="hidden">
+                        <h4>Report Generation Status:</h4>
+                        <p>Report ID: <span id="reportId"></span></p>
+                        <p>Status: <span id="reportProgress">Generating...</span></p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="reportProgressBar" style="width: 0%"></div>
+                        </div>
+                        <button class="btn-secondary" id="downloadReport" onclick="downloadReport()" disabled>Download Report</button>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>🚨 Alert Management</h3>
+                    <div class="alert-filters">
+                        <select id="alertSeverity" onchange="filterAlerts()">
+                            <option value="">All Severities</option>
+                            <option value="critical">Critical</option>
+                            <option value="high">High</option>
+                            <option value="medium">Medium</option>
+                            <option value="low">Low</option>
+                        </select>
+                        <select id="alertStatus" onchange="filterAlerts()">
+                            <option value="">All Status</option>
+                            <option value="open">Open</option>
+                            <option value="investigating">Investigating</option>
+                            <option value="resolved">Resolved</option>
+                        </select>
+                    </div>
+
+                    <div id="alertsList">
+                        <div class="alert-item critical">
+                            <div class="alert-header">
+                                <span class="alert-severity">🔴 Critical</span>
+                                <span class="alert-time">1 hour ago</span>
+                            </div>
+                            <p><strong>Contamination Detected</strong></p>
+                            <p>Batch: NEE-2024-004 - Heavy metal contamination</p>
+                            <div class="alert-actions">
+                                <button class="btn-primary" onclick="escalateAlert('ALERT-001')">Escalate</button>
+                                <button class="btn-secondary" onclick="resolveAlert('ALERT-001')">Resolve</button>
+                            </div>
+                        </div>
+
+                        <div class="alert-item medium">
+                            <div class="alert-header">
+                                <span class="alert-severity">🟡 Medium</span>
+                                <span class="alert-time">3 hours ago</span>
+                            </div>
+                            <p><strong>Testing Delay</strong></p>
+                            <p>Batch: TUL-2024-005 - Testing overdue</p>
+                            <div class="alert-actions">
+                                <button class="btn-secondary" onclick="acknowledgeAlert('ALERT-002')">Acknowledge</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Load user info
+        document.addEventListener('DOMContentLoaded', function() {
+            const username = localStorage.getItem('username') || 'Regulator';
+            document.getElementById('username').textContent = username;
+            
+            // Set up event listeners
+            document.getElementById('reportPeriod').addEventListener('change', function() {
+                const customRange = document.getElementById('customDateRange');
+                customRange.style.display = this.value === 'custom' ? 'block' : 'none';
+            });
+        });
+
+        // Handle provenance query
+        document.getElementById('provenanceQuery').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const queryData = Object.fromEntries(formData);
+            
+            console.log('Blockchain query:', queryData);
+            
+            // Simulate blockchain query
+            document.getElementById('queryResults').classList.remove('hidden');
+            document.getElementById('resultsContainer').innerHTML = `
+                <div class="query-result">
+                    <h5>Found 3 matching records:</h5>
+                    <div class="result-item">
+                        <strong>ASH-2024-001</strong> - Ashwagandha batch
+                        <p>Farmer: Ramesh Kumar | Status: Verified</p>
+                        <button class="btn-secondary" onclick="viewFullProvenance('ASH-2024-001')">View Full Chain</button>
+                    </div>
+                </div>
+            `;
+        });
+
+        // Handle report generation
+        document.getElementById('reportForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const reportData = Object.fromEntries(formData);
+            
+            console.log('Generating report:', reportData);
+            
+            // Show report status
+            const reportId = 'RPT-' + Date.now();
+            document.getElementById('reportId').textContent = reportId;
+            document.getElementById('reportStatus').classList.remove('hidden');
+            
+            // Simulate report generation progress
+            let progress = 0;
+            const progressInterval = setInterval(() => {
+                progress += 20;
+                document.getElementById('reportProgressBar').style.width = progress + '%';
+                document.getElementById('reportProgress').textContent = `Generating... ${progress}%`;
+                
+                if (progress >= 100) {
+                    clearInterval(progressInterval);
+                    document.getElementById('reportProgress').textContent = 'Ready for Download';
+                    document.getElementById('downloadReport').disabled = false;
+                }
+            }, 1000);
+        });
+
+        function updateMonitorView() {
+            const monitorType = document.getElementById('monitorType').value;
+            console.log('Updating monitor view:', monitorType);
+            // In real implementation, this would fetch different data based on monitor type
+        }
+
+        function refreshMonitor() {
+            console.log('Refreshing monitor data...');
+            // In real implementation, this would fetch latest blockchain data
+        }
+
+        function investigateAlert(batchId) {
+            alert(`Opening investigation for batch: ${batchId}`);
+        }
+
+        function viewDetails(batchId) {
+            window.open(`product-details.html?id=${batchId}`, '_blank');
+        }
+
+        function sendReminder(batchId) {
+            alert(`Reminder sent for batch: ${batchId}`);
+        }
+
+        function viewFullProvenance(batchId) {
+            window.open(`product-details.html?id=${batchId}`, '_blank');
+        }
+
+        function downloadReport() {
+            alert('Report download started');
+        }
+
+        function filterAlerts() {
+            const severity = document.getElementById('alertSeverity').value;
+            const status = document.getElementById('alertStatus').value;
+            console.log('Filtering alerts:', { severity, status });
+        }
+
+        function escalateAlert(alertId) {
+            alert(`Alert ${alertId} escalated to senior management`);
+        }
+
+        function resolveAlert(alertId) {
+            if (confirm(`Mark alert ${alertId} as resolved?`)) {
+                alert(`Alert ${alertId} resolved`);
+            }
+        }
+
+        function acknowledgeAlert(alertId) {
+            alert(`Alert ${alertId} acknowledged`);
+        }
+
+        function logout() {
+            localStorage.removeItem('userRole');
+            localStorage.removeItem('username');
+            window.location.href = 'index.html';
+        }
+    </script>
+
+    <style>
+        .monitor-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            align-items: end;
+        }
+
+        .monitor-controls .form-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+
+        .activity-item, .alert-item {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .activity-item.alert, .alert-item.critical {
+            border-left: 4px solid #dc3545;
+        }
+
+        .activity-item.warning, .alert-item.medium {
+            border-left: 4px solid #ffc107;
+        }
+
+        .activity-item.normal {
+            border-left: 4px solid #28a745;
+        }
+
+        .activity-header, .alert-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .activity-type, .alert-severity {
+            font-weight: bold;
+        }
+
+        .activity-time, .alert-time {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .activity-actions, .alert-actions {
+            margin-top: 1rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .date-range {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .date-range input {
+            flex: 1;
+        }
+
+        .compliance-metrics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .metric-card {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin: 0.5rem 0;
+        }
+
+        .metric-trend {
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .metric-trend.up {
+            color: #28a745;
+        }
+
+        .metric-trend.down {
+            color: #dc3545;
+        }
+
+        .metric-trend.neutral {
+            color: #6c757d;
+        }
+
+        .compliance-breakdown {
+            margin-top: 2rem;
+        }
+
+        .compliance-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .compliance-item span:first-child {
+            min-width: 120px;
+            font-size: 0.9rem;
+        }
+
+        .compliance-bar {
+            flex: 1;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+        }
+
+        .compliance-fill {
+            height: 100%;
+            background: #4CAF50;
+            border-radius: 4px;
+            transition: width 0.3s;
+        }
+
+        .compliance-item span:last-child {
+            min-width: 40px;
+            text-align: right;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        .alert-filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .alert-filters select {
+            flex: 1;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #4CAF50;
+            border-radius: 4px;
+            transition: width 0.3s;
+        }
+
+        .query-result {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .result-item {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 0.5rem 0;
+            border-left: 4px solid #4CAF50;
+        }
+    </style>
+</body>
+</html>
