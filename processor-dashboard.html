@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processor Dashboard - AyurTrace</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">🌿 AyurTrace</div>
+            <div class="nav-menu">
+                <a href="index.html">Home</a>
+                <a href="reports.html">Reports</a>
+                <a href="#" onclick="logout()">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="dashboard">
+        <div class="container">
+            <div class="dashboard-header">
+                <h1>Processor Dashboard</h1>
+                <p>Welcome, <span id="username">Processor</span> | Role: Processing Unit</p>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h3>📦 New Batch Processing</h3>
+                    <form id="batchForm">
+                        <div class="form-group">
+                            <label for="batchId">Batch ID</label>
+                            <input type="text" id="batchId" name="batchId" placeholder="e.g., ASH-2024-001" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="herbType">Herb Type</label>
+                            <select id="herbType" name="herbType" required>
+                                <option value="">Select Herb</option>
+                                <option value="ashwagandha">Ashwagandha</option>
+                                <option value="turmeric">Turmeric</option>
+                                <option value="brahmi">Brahmi</option>
+                                <option value="neem">Neem</option>
+                                <option value="tulsi">Tulsi</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="quantity">Quantity (kg)</label>
+                            <input type="number" id="quantity" name="quantity" min="1" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="processMethod">Processing Method</label>
+                            <select id="processMethod" name="processMethod" required>
+                                <option value="">Select Method</option>
+                                <option value="sun-drying">Sun Drying</option>
+                                <option value="shade-drying">Shade Drying</option>
+                                <option value="steam-distillation">Steam Distillation</option>
+                                <option value="grinding">Grinding</option>
+                                <option value="extraction">Extraction</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="temperature">Processing Temperature (°C)</label>
+                            <input type="number" id="temperature" name="temperature" min="0" max="100">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="duration">Processing Duration (hours)</label>
+                            <input type="number" id="duration" name="duration" min="1">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="processNotes">Processing Notes</label>
+                            <textarea id="processNotes" name="processNotes" rows="3" placeholder="Additional processing details..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-primary">Record Processing Step</button>
+                    </form>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>📊 Active Batches</h3>
+                    <div id="activeBatches">
+                        <div class="batch-item">
+                            <div class="batch-header">
+                                <strong>ASH-2024-001</strong>
+                                <span class="status processing">Processing</span>
+                            </div>
+                            <p>Ashwagandha - 50kg</p>
+                            <p>Started: March 15, 2024</p>
+                            <div class="batch-actions">
+                                <button class="btn-secondary" onclick="updateBatch('ASH-2024-001')">Update</button>
+                                <button class="btn-primary" onclick="generateQR('ASH-2024-001')">Generate QR</button>
+                            </div>
+                        </div>
+
+                        <div class="batch-item">
+                            <div class="batch-header">
+                                <strong>TUR-2024-002</strong>
+                                <span class="status completed">Completed</span>
+                            </div>
+                            <p>Turmeric - 75kg</p>
+                            <p>Completed: March 10, 2024</p>
+                            <div class="batch-actions">
+                                <button class="btn-secondary" onclick="viewBatch('TUR-2024-002')">View Details</button>
+                                <button class="btn-primary" onclick="generateQR('TUR-2024-002')">Generate QR</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>🏷️ QR Code Generator</h3>
+                    <div class="form-group">
+                        <label for="qrBatchId">Select Batch for QR Code</label>
+                        <select id="qrBatchId" name="qrBatchId">
+                            <option value="">Select Batch</option>
+                            <option value="ASH-2024-001">ASH-2024-001 - Ashwagandha</option>
+                            <option value="TUR-2024-002">TUR-2024-002 - Turmeric</option>
+                        </select>
+                    </div>
+                    
+                    <button class="btn-primary" onclick="generateQRCode()">Generate QR Code</button>
+                    
+                    <div id="qrCodeDisplay" class="hidden">
+                        <h4>Generated QR Code:</h4>
+                        <div id="qrCodeContainer" style="text-align: center; margin: 1rem 0;">
+                            <div style="width: 200px; height: 200px; background: #f0f0f0; margin: 0 auto; display: flex; align-items: center; justify-content: center; border: 2px dashed #ccc;">
+                                QR Code Preview
+                            </div>
+                        </div>
+                        <button class="btn-secondary" onclick="downloadQR()">Download QR Code</button>
+                        <button class="btn-secondary" onclick="printQR()">Print QR Code</button>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>📈 Processing Statistics</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number">24</div>
+                            <div class="stat-label">Batches This Month</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">1,250kg</div>
+                            <div class="stat-label">Total Processed</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">98.5%</div>
+                            <div class="stat-label">Quality Pass Rate</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">5</div>
+                            <div class="stat-label">Pending Lab Tests</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Load user info
+        document.addEventListener('DOMContentLoaded', function() {
+            const username = localStorage.getItem('username') || 'Processor';
+            document.getElementById('username').textContent = username;
+        });
+
+        // Handle batch form submission
+        document.getElementById('batchForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const batchData = Object.fromEntries(formData);
+            
+            // Simulate blockchain transaction
+            console.log('Recording batch processing:', batchData);
+            
+            // In real implementation, this would interact with blockchain
+            alert('Processing step recorded successfully on blockchain!');
+            
+            // Reset form
+            e.target.reset();
+            
+            // Refresh active batches (in real app, this would fetch from blockchain)
+            refreshActiveBatches();
+        });
+
+        function updateBatch(batchId) {
+            alert(`Opening update form for batch: ${batchId}`);
+            // In real implementation, this would open a modal or navigate to update page
+        }
+
+        function viewBatch(batchId) {
+            window.open(`product-details.html?id=${batchId}`, '_blank');
+        }
+
+        function generateQR(batchId) {
+            document.getElementById('qrBatchId').value = batchId;
+            generateQRCode();
+        }
+
+        function generateQRCode() {
+            const batchId = document.getElementById('qrBatchId').value;
+            if (!batchId) {
+                alert('Please select a batch first');
+                return;
+            }
+            
+            // Show QR code display
+            document.getElementById('qrCodeDisplay').classList.remove('hidden');
+            
+            // In real implementation, this would generate actual QR code
+            console.log('Generating QR code for batch:', batchId);
+        }
+
+        function downloadQR() {
+            alert('QR Code download started');
+            // In real implementation, this would trigger QR code download
+        }
+
+        function printQR() {
+            window.print();
+        }
+
+        function refreshActiveBatches() {
+            // In real implementation, this would fetch latest batch data from blockchain
+            console.log('Refreshing active batches...');
+        }
+
+        function logout() {
+            localStorage.removeItem('userRole');
+            localStorage.removeItem('username');
+            window.location.href = 'index.html';
+        }
+    </script>
+
+    <style>
+        .batch-item {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #4CAF50;
+        }
+
+        .batch-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .status {
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .status.processing {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status.completed {
+            background: #d1edff;
+            color: #0c5460;
+        }
+
+        .batch-actions {
+            margin-top: 1rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .batch-actions button {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+    </style>
+</body>
+</html>

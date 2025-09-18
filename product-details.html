@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - AyurTrace</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">🌿 AyurTrace</div>
+            <div class="nav-menu">
+                <a href="index.html">Home</a>
+                <a href="#" onclick="window.print()">Print</a>
+                <a href="#" onclick="shareProduct()">Share</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="product-details">
+        <div class="container">
+            <div class="product-header">
+                <img id="productImage" src="https://via.placeholder.com/200x200/4CAF50/white?text=Herb" alt="Product" class="product-image">
+                <h1 id="productName">Ashwagandha Root</h1>
+                <p id="productDescription">Premium quality Ashwagandha root from certified organic farms</p>
+                <div class="product-meta">
+                    <span class="batch-id">Batch: <strong id="batchId">ASH-2024-001</strong></span>
+                    <span class="verification-status">✅ Verified on Blockchain</span>
+                </div>
+            </div>
+
+            <div class="provenance-timeline">
+                <div class="timeline-item">
+                    <h3>🌱 Harvest Information</h3>
+                    <div class="date">Harvested on: <span id="harvestDate">March 15, 2024</span></div>
+                    <div class="details">
+                        <p><strong>Species:</strong> <span id="species">Withania somnifera</span></p>
+                        <p><strong>Variety:</strong> <span id="variety">Indian Winter Cherry</span></p>
+                        <p><strong>Harvest Method:</strong> <span id="harvestMethod">Hand-picked at optimal maturity</span></p>
+                        <p><strong>Weather Conditions:</strong> <span id="weather">Sunny, 28°C, Low humidity</span></p>
+                    </div>
+                    <div class="map-container" id="harvestMap">
+                        📍 Harvest Location: Rajasthan, India (26.9124°N, 75.7873°E)
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <h3>👨‍🌾 Farmer Profile</h3>
+                    <div class="date">Farmer: <span id="farmerName">Ramesh Kumar</span></div>
+                    <div class="details">
+                        <p><strong>Farm:</strong> <span id="farmName">Green Valley Organic Farm</span></p>
+                        <p><strong>Certification:</strong> <span id="farmCertification">USDA Organic, Fair Trade Certified</span></p>
+                        <p><strong>Experience:</strong> <span id="farmerExperience">15+ years in organic farming</span></p>
+                        <p><strong>Community:</strong> <span id="community">Rajasthan Farmers Cooperative</span></p>
+                        <p><strong>Sustainability Practices:</strong> Water conservation, crop rotation, natural pest control</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <h3>🏭 Processing Steps</h3>
+                    <div class="date">Processed on: <span id="processDate">March 18, 2024</span></div>
+                    <div class="details">
+                        <p><strong>Processor:</strong> <span id="processorName">AyurPure Processing Unit</span></p>
+                        <p><strong>Processing Method:</strong> <span id="processMethod">Traditional sun-drying, grinding</span></p>
+                        <p><strong>Temperature Control:</strong> <span id="temperature">Below 40°C to preserve nutrients</span></p>
+                        <p><strong>Packaging:</strong> <span id="packaging">Food-grade sealed containers</span></p>
+                        <p><strong>Storage Conditions:</strong> <span id="storage">Cool, dry place, humidity controlled</span></p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <h3>🔬 Laboratory Certificates</h3>
+                    <div class="date">Tested on: <span id="testDate">March 20, 2024</span></div>
+                    <div class="details">
+                        <p><strong>Testing Lab:</strong> <span id="labName">National Ayurvedic Research Institute</span></p>
+                        <p><strong>Lab Certification:</strong> ISO 17025 Accredited</p>
+                    </div>
+                    <div class="certificates">
+                        <div class="certificate passed">
+                            <h4>Moisture Content</h4>
+                            <p>8.2% ✅</p>
+                            <small>Standard: <10%</small>
+                        </div>
+                        <div class="certificate passed">
+                            <h4>Pesticide Residue</h4>
+                            <p>Not Detected ✅</p>
+                            <small>Below detection limit</small>
+                        </div>
+                        <div class="certificate passed">
+                            <h4>DNA Authentication</h4>
+                            <p>Confirmed ✅</p>
+                            <small>Withania somnifera</small>
+                        </div>
+                        <div class="certificate passed">
+                            <h4>Heavy Metals</h4>
+                            <p>Within Limits ✅</p>
+                            <small>As per WHO standards</small>
+                        </div>
+                        <div class="certificate passed">
+                            <h4>Microbial Count</h4>
+                            <p>Safe ✅</p>
+                            <small>Below threshold</small>
+                        </div>
+                        <div class="certificate passed">
+                            <h4>Active Compounds</h4>
+                            <p>3.2% Withanolides ✅</p>
+                            <small>High potency</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <h3>🌍 Sustainability & Fair Trade</h3>
+                    <div class="date">Verified on: <span id="sustainabilityDate">March 22, 2024</span></div>
+                    <div class="details">
+                        <p><strong>Carbon Footprint:</strong> <span id="carbonFootprint">2.1 kg CO2/kg product</span></p>
+                        <p><strong>Water Usage:</strong> <span id="waterUsage">15% below industry average</span></p>
+                        <p><strong>Fair Trade Premium:</strong> <span id="fairTrade">₹50 per kg paid to farmers</span></p>
+                        <p><strong>Community Impact:</strong> <span id="communityImpact">Supports 25 farming families</span></p>
+                        <p><strong>Biodiversity:</strong> <span id="biodiversity">Promotes native seed varieties</span></p>
+                        <p><strong>Soil Health:</strong> <span id="soilHealth">Organic matter increased by 12%</span></p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <h3>📦 Final Product</h3>
+                    <div class="date">Packaged on: <span id="packageDate">March 25, 2024</span></div>
+                    <div class="details">
+                        <p><strong>Manufacturer:</strong> <span id="manufacturerName">Himalaya Wellness</span></p>
+                        <p><strong>Product Code:</strong> <span id="productCode">HW-ASH-500-2024</span></p>
+                        <p><strong>Net Weight:</strong> <span id="netWeight">500g</span></p>
+                        <p><strong>Expiry Date:</strong> <span id="expiryDate">March 2026</span></p>
+                        <p><strong>Storage Instructions:</strong> <span id="storageInstructions">Store in cool, dry place</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="blockchain-verification">
+                <h3>🔗 Blockchain Verification</h3>
+                <p><strong>Transaction Hash:</strong> <code id="txHash">0x1a2b3c4d5e6f7890abcdef1234567890abcdef12</code></p>
+                <p><strong>Block Number:</strong> <span id="blockNumber">15,847,392</span></p>
+                <p><strong>Timestamp:</strong> <span id="timestamp">2024-03-25 14:30:22 UTC</span></p>
+                <p><strong>Network:</strong> <span id="network">Ethereum Mainnet</span></p>
+                <button class="btn-primary" onclick="verifyOnBlockchain()">Verify on Blockchain Explorer</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Load product data from URL parameters or localStorage
+        function loadProductData() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id') || 'ASH-2024-001';
+            
+            // Simulate loading data from blockchain
+            console.log('Loading product data for:', productId);
+            
+            // In a real implementation, this would fetch from blockchain
+            // For now, we'll use the default data already in the HTML
+        }
+
+        function shareProduct() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'AyurTrace Product Verification',
+                    text: 'Check out this verified Ayurvedic herb on AyurTrace',
+                    url: window.location.href
+                });
+            } else {
+                // Fallback for browsers that don't support Web Share API
+                navigator.clipboard.writeText(window.location.href);
+                alert('Product link copied to clipboard!');
+            }
+        }
+
+        function verifyOnBlockchain() {
+            const txHash = document.getElementById('txHash').textContent;
+            window.open(`https://etherscan.io/tx/${txHash}`, '_blank');
+        }
+
+        // Load data when page loads
+        document.addEventListener('DOMContentLoaded', loadProductData);
+    </script>
+</body>
+</html>

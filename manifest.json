@@ -1,0 +1,105 @@
+{
+    "name": "AyurTrace - Blockchain Herb Traceability",
+    "short_name": "AyurTrace",
+    "description": "Blockchain-powered Ayurvedic herb traceability system for complete supply chain transparency",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#667eea",
+    "theme_color": "#4CAF50",
+    "orientation": "portrait-primary",
+    "scope": "/",
+    "lang": "en",
+    "categories": ["health", "agriculture", "blockchain", "traceability"],
+    "icons": [
+        {
+            "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQ4IiBoZWlnaHQ9IjQ4IiByeD0iOCIgZmlsbD0iIzRDQUY1MCIvPgo8cGF0aCBkPSJNMjQgMTBDMjYuMjA5MSAxMCAyOCAxMS43OTA5IDI4IDE0VjE2QzI4IDE4LjIwOTEgMjYuMjA5MSAyMCAyNCAyMEMyMS43OTA5IDIwIDIwIDE4LjIwOTEgMjAgMTZWMTRDMjAgMTEuNzkwOSAyMS43OTA5IDEwIDI0IDEwWiIgZmlsbD0id2hpdGUiLz4KPHA+aCBkPSJNMjQgMjhDMjYuMjA5MSAyOCAyOCAyOS43OTA5IDI4IDMyVjM0QzI4IDM2LjIwOTEgMjYuMjA5MSAzOCAyNCAzOEMyMS43OTA5IDM4IDIwIDM2LjIwOTEgMjAgMzRWMzJDMjAgMjkuNzkwOSAyMS43OTA5IDI4IDI0IDI4WiIgZmlsbD0id2hpdGUiLz4KPHA+aCBkPSJNMTYgMTlDMTguMjA5MSAxOSAyMCAyMC43OTA5IDIwIDIzVjI1QzIwIDI3LjIwOTEgMTguMjA5MSAyOSAxNiAyOUMxMy43OTA5IDI5IDEyIDI3LjIwOTEgMTIgMjVWMjNDMTIgMjAuNzkwOSAxMy43OTA5IDE5IDE2IDE5WiIgZmlsbD0id2hpdGUiLz4KPHA+aCBkPSJNMzIgMTlDMzQuMjA5MSAxOSAzNiAyMC43OTA5IDM2IDIzVjI1QzM2IDI3LjIwOTEgMzQuMjA5MSAyOSAzMiAyOUMyOS43OTA5IDI5IDI4IDI3LjIwOTEgMjggMjVWMjNDMjggMjAuNzkwOSAyOS43OTA5IDE5IDMyIDE5WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+",
+            "sizes": "48x48",
+            "type": "image/svg+xml"
+        },
+        {
+            "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzIiIGhlaWdodD0iNzIiIHZpZXdCb3g9IjAgMCA3MiA3MiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjcyIiBoZWlnaHQ9IjcyIiByeD0iMTIiIGZpbGw9IiM0Q0FGNTASCZ8cGF0aCBkPSJNMzYgMTVDMzkuMzEzNyAxNSA0MiAxNy42ODYzIDQyIDIxVjI0QzQyIDI3LjMxMzcgMzkuMzEzNyAzMCAzNiAzMEMzMi42ODYzIDMwIDMwIDI3LjMxMzcgMzAgMjRWMjFDMzAgMTcuNjg2MyAzMi42ODYzIDE1IDM2IDE1WiIgZmlsbD0id2hpdGUiLz4KPHA+aCBkPSJNMzYgNDJDMzkuMzEzNyA0MiA0MiA0NC42ODYzIDQyIDQ4VjUxQzQyIDU0LjMxMzcgMzkuMzEzNyA1NyAzNiA1N0MzMi42ODYzIDU3IDMwIDU0LjMxMzcgMzAgNTFWNDhDMzAgNDQuNjg2MyAzMi42ODYzIDQyIDM2IDQyWiIgZmlsbD0id2hpdGUiLz4KPHA+aCBkPSJNMjQgMjguNUMyNy4zMTM3IDI4LjUgMzAgMzEuMTg2MyAzMCAzNC41VjM3LjVDMzAgNDAuODEzNyAyNy4zMTM3IDQzLjUgMjQgNDMuNUMyMC42ODYzIDQzLjUgMTggNDAuODEzNyAxOCAzNy41VjM0LjVDMTggMzEuMTg2MyAyMC42ODYzIDI4LjUgMjQgMjguNVoiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik00OCAyOC41QzUxLjMxMzcgMjguNSA1NCAzMS4xODYzIDU0IDM0LjVWMzcuNUM1NCA0MC44MTM3IDUxLjMxMzcgNDMuNSA0OCA0My41QzQ0LjY4NjMgNDMuNSA0MiA0MC44MTM3IDQyIDM3LjVWMzQuNUM0MiAzMS4xODYzIDQ0LjY4NjMgMjguNSA0OCAyOC41WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+",
+            "sizes": "72x72",
+            "type": "image/svg+xml"
+        },
+        {
+            "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiByeD0iMTYiIGZpbGw9IiM0Q0FGNTASCZ8cGF0aCBkPSJNNDggMjBDNTIuNDE4MyAyMCA1NiAyMy41ODE3IDU2IDI4VjMyQzU2IDM2LjQxODMgNTIuNDE4MyA0MCA0OCA0MEM0My41ODE3IDQwIDQwIDM2LjQxODMgNDAgMzJWMjhDNDAgMjMuNTgxNyA0My41ODE3IDIwIDQ4IDIwWiIgZmlsbD0id2hpdGUiLz4KPHA+aCBkPSJNNDggNTZDNTIuNDE4MyA1NiA1NiA1OS41ODE3IDU2IDY0VjY4QzU2IDcyLjQxODMgNTIuNDE4MyA3NiA0OCA3NkM0My41ODE3IDc2IDQwIDcyLjQxODMgNDAgNjhWNjRDNDAgNTkuNTgxNyA0My41ODE3IDU2IDQ4IDU2WiIgZmlsbD0id2hpdGUiLz4KPHA+aCBkPSJNMzIgMzhDMzYuNDE4MyAzOCA0MCA0MS41ODE3IDQwIDQ2VjUwQzQwIDU0LjQxODMgMzYuNDE4MyA1OCAzMiA1OEMyNy41ODE3IDU4IDI0IDU0LjQxODMgMjQgNTBWNDZDMjQgNDEuNTgxNyAyNy41ODE3IDM4IDMyIDM4WiIgZmlsbD0id2hpdGUiLz4KPHA+aCBkPSJNNjQgMzhDNjguNDE4MyAzOCA3MiA0MS41ODE3IDcyIDQ2VjUwQzcyIDU0LjQxODMgNjguNDE4MyA1OCA2NCA1OEM1OS41ODE3IDU4IDU2IDU0LjQxODMgNTYgNTBWNDZDNTYgNDEuNTgxNyA1OS41ODE3IDM4IDY0IDM4WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+",
+            "sizes": "96x96",
+            "type": "image/svg+xml"
+        },
+        {
+            "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQ0IiBoZWlnaHQ9IjE0NCIgdmlld0JveD0iMCAwIDE0NCAxNDQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxNDQiIGhlaWdodD0iMTQ0IiByeD0iMjQiIGZpbGw9IiM0Q0FGNTASCZ8cGF0aCBkPSJNNzIgMzBDNzguNjI3NCAzMCA4NCAzNS4zNzI2IDg0IDQyVjQ4Qzg0IDU0LjYyNzQgNzguNjI3NCA2MCA3MiA2MEM2NS4zNzI2IDYwIDYwIDU0LjYyNzQgNjAgNDhWNDJDNjAgMzUuMzcyNiA2NS4zNzI2IDMwIDcyIDMwWiIgZmlsbD0id2hpdGUiLz4KPHA+aCBkPSJNNzIgODRDNzguNjI3NCA4NCA4NCA4OS4zNzI2IDg0IDk2VjEwMkM4NCAxMDguNjI3IDc4LjYyNzQgMTE0IDcyIDExNEM2NS4zNzI2IDExNCA2MCAxMDguNjI3IDYwIDEwMlY5NkM2MCA4OS4zNzI2IDY1LjM3MjYgODQgNzIgODRaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNNDggNTdDNTQuNjI3NCA1NyA2MCA2Mi4zNzI2IDYwIDY5Vjc1QzYwIDgxLjYyNzQgNTQuNjI3NCA4NyA0OCA4N0M0MS4zNzI2IDg3IDM2IDgxLjYyNzQgMzYgNzVWNjlDMzYgNjIuMzcyNiA0MS4zNzI2IDU3IDQ4IDU3WiIgZmlsbD0id2hpdGUiLz4KPHA+aCBkPSJNOTYgNTdDMTAyLjYyNyA1NyAxMDggNjIuMzcyNiAxMDggNjlWNzVDMTA4IDgxLjYyNzQgMTAyLjYyNyA4NyA5NiA4N0M4OS4zNzI2IDg3IDg0IDgxLjYyNzQgODQgNzVWNjlDODQgNjIuMzcyNiA4OS4zNzI2IDU3IDk2IDU3WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+",
+            "sizes": "144x144",
+            "type": "image/svg+xml"
+        },
+        {
+            "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiByeD0iMzIiIGZpbGw9IiM0Q0FGNTASCZ8cGF0aCBkPSJNOTYgNDBDMTA0LjgzNyA0MCAxMTIgNDcuMTYzNCAxMTIgNTZWNjRDMTEyIDcyLjgzNjYgMTA0LjgzNyA4MCA5NiA4MEM4Ny4xNjM0IDgwIDgwIDcyLjgzNjYgODAgNjRWNTZDODAgNDcuMTYzNCA4Ny4xNjM0IDQwIDk2IDQwWiIgZmlsbD0id2hpdGUiLz4KPHA+aCBkPSJNOTYgMTEyQzEwNC44MzcgMTEyIDExMiAxMTkuMTYzIDExMiAxMjhWMTM2QzExMiAxNDQuODM3IDEwNC44MzcgMTUyIDk2IDE1MkM4Ny4xNjM0IDE1MiA4MCAxNDQuODM3IDgwIDEzNlYxMjhDODAgMTE5LjE2MyA4Ny4xNjM0IDExMiA5NiAxMTJaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNNjQgNzZDNzIuODM2NiA3NiA4MCA4My4xNjM0IDgwIDkyVjEwMEM4MCAxMDguODM3IDcyLjgzNjYgMTE2IDY0IDExNkM1NS4xNjM0IDExNiA0OCAxMDguODM3IDQ4IDEwMFY5MkM0OCA4My4xNjM0IDU1LjE2MzQgNzYgNjQgNzZaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTI4IDc2QzEzNi44MzcgNzYgMTQ0IDgzLjE2MzQgMTQ0IDkyVjEwMEMxNDQgMTA4LjgzNyAxMzYuODM3IDExNiAxMjggMTE2QzExOS4xNjMgMTE2IDExMiAxMDguODM3IDExMiAxMDBWOTJDMTEyIDgzLjE2MzQgMTE5LjE2MyA3NiAxMjggNzZaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4=",
+            "sizes": "192x192",
+            "type": "image/svg+xml"
+        },
+        {
+            "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDUxMiA1MTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiByeD0iODQiIGZpbGw9IiM0Q0FGNTASCZ8cGF0aCBkPSJNMjU2IDEwNkMyNzguNTEgMTA2IDI5NyAxMjQuNDkgMjk3IDE0N1YxNzFDMjk3IDE5My41MSAyNzguNTEgMjEyIDI1NiAyMTJDMjMzLjQ5IDIxMiAyMTUgMTkzLjUxIDIxNSAxNzFWMTQ3QzIxNSAxMjQuNDkgMjMzLjQ5IDEwNiAyNTYgMTA2WiIgZmlsbD0id2hpdGUiLz4KPHA+aCBkPSJNMjU2IDMwMEMyNzguNTEgMzAwIDI5NyAzMTguNDkgMjk3IDM0MVYzNjVDMjk3IDM4Ny41MSAyNzguNTEgNDA2IDI1NiA0MDZDMJM+LjQ5IDQwNiAyMTUgMzg3LjUxIDIxNSAzNjVWMzQxQzIxNSAzMTguNDkgMjMzLjQ5IDMwMCAyNTYgMzAwWiIgZmlsbD0id2hpdGUiLz4KPHA+aCBkPSJNMTcxIDIwM0MxOTMuNTEgMjAzIDIxMiAyMjEuNDkgMjEyIDI0NFYyNjhDMjEyIDI5MC41MSAxOTMuNTEgMzA5IDE3MSAzMDlDMTQ4LjQ5IDMwOSAxMzAgMjkwLjUxIDEzMCAyNjhWMjQ0QzEzMCAyMjEuNDkgMTQ4LjQ5IDIwMyAxNzEgMjAzWiIgZmlsbD0id2hpdGUiLz4KPHA+aCBkPSJNMzQxIDIwM0MzNjMuNTEgMjAzIDM4MiAyMjEuNDkgMzgyIDI0NFYyNjhDMzgyIDI5MC41MSAzNjMuNTEgMzA5IDM0MSAzMDlDMzE4LjQ5IDMwOSAzMDAgMjkwLjUxIDMwMCAyNjhWMjQ0QzMwMCAyMjEuNDkgMzE4LjQ5IDIwMyAzNDEgMjAzWiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+",
+            "sizes": "512x512",
+            "type": "image/svg+xml"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjU2OCIgdmlld0JveD0iMCAwIDMyMCA1NjgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMjAiIGhlaWdodD0iNTY4IiBmaWxsPSIjZjVmNWY1Ii8+CjxyZWN0IHg9IjIwIiB5PSI2MCIgd2lkdGg9IjI4MCIgaGVpZ2h0PSI0MCIgcng9IjgiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHg9IjIwIiB5PSIxMjAiIHdpZHRoPSIyODAiIGhlaWdodD0iMjAwIiByeD0iMTIiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHg9IjQwIiB5PSIxNDAiIHdpZHRoPSIyNDAiIGhlaWdodD0iMTYwIiByeD0iOCIgZmlsbD0iIzRDQUY1MCIvPgo8L3N2Zz4=",
+            "sizes": "320x568",
+            "type": "image/svg+xml",
+            "form_factor": "narrow"
+        },
+        {
+            "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAyNCIgaGVpZ2h0PSI3NjgiIHZpZXdCb3g9IjAgMCAxMDI0IDc2OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjEwMjQiIGhlaWdodD0iNzY4IiBmaWxsPSIjZjVmNWY1Ii8+CjxyZWN0IHg9IjQwIiB5PSI0MCIgd2lkdGg9Ijk0NCIgaGVpZ2h0PSI2MCIgcng9IjEyIiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB4PSI0MCIgeT0iMTIwIiB3aWR0aD0iNDUwIiBoZWlnaHQ9IjYwMCIgcng9IjE2IiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB4PSI1MzQiIHk9IjEyMCIgd2lkdGg9IjQ1MCIgaGVpZ2h0PSI2MDAiIHJ4PSIxNiIgZmlsbD0id2hpdGUiLz4KPHJlY3QgeD0iNjAiIHk9IjE0MCIgd2lkdGg9IjQxMCIgaGVpZ2h0PSIyMDAiIHJ4PSIxMiIgZmlsbD0iIzRDQUY1MCIvPgo8L3N2Zz4=",
+            "sizes": "1024x768",
+            "type": "image/svg+xml",
+            "form_factor": "wide"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Scan QR Code",
+            "short_name": "Scan",
+            "description": "Quickly scan a QR code to verify herb authenticity",
+            "url": "/?action=scan",
+            "icons": [
+                {
+                    "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiByeD0iMTYiIGZpbGw9IiM0Q0FGNTASCZ8cGF0aCBkPSJNMjQgMjRIMzZWMzZIMjRWMjRaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNNjAgMjRINzJWMzZINjBWMjRaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMjQgNjBIMzZWNzJIMjRWNjBaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNNDggNDhINjBWNjBINDhWNDhaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4=",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Dashboard",
+            "short_name": "Dashboard",
+            "description": "Access your role-based dashboard",
+            "url": "/login.html",
+            "icons": [
+                {
+                    "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiByeD0iMTYiIGZpbGw9IiM0Q0FGNTASCZ8cGF0aCBkPSJNMjQgMjRINDRWNDRIMjRWMjRaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNNTIgMjRINzJWNDRINTJWMjRaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMjQgNTJINDRWNzJIMjRWNTJaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNNTIgNTJINzJWNzJINTJWNTJaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4=",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Reports",
+            "short_name": "Reports",
+            "description": "View analytics and compliance reports",
+            "url": "/reports.html",
+            "icons": [
+                {
+                    "src": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTYiIGhlaWdodD0iOTYiIHZpZXdCb3g9IjAgMCA5NiA5NiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9Ijk2IiBoZWlnaHQ9Ijk2IiByeD0iMTYiIGZpbGw9IiM0Q0FGNTASCZ8cGF0aCBkPSJNMzIgMjRINjRWNzJIMzJWMjRaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNNDAgMzJINTZWNDBINDBWMzJaIiBmaWxsPSIjNENBRjUwIi8+CjxwYXRoIGQ9Ik00MCA0OEg1NlY1Nkg0MFY0OFoiIGZpbGw9IiM0Q0FGNTASCZ8cGF0aCBkPSJNNDAgNjRINTZWNzJINDBWNjRaIiBmaWxsPSIjNENBRjUwIi8+CjwvdGV4dD4KPC9zdmc+",
+                    "sizes": "96x96"
+                }
+            ]
+        }
+    ],
+    "related_applications": [],
+    "prefer_related_applications": false,
+    "edge_side_panel": {
+        "preferred_width": 400
+    },
+    "launch_handler": {
+        "client_mode": "navigate-existing"
+    }
+}

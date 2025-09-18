@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Dashboard - AyurTrace</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">🌿 AyurTrace</div>
+            <div class="nav-menu">
+                <a href="index.html">Home</a>
+                <a href="reports.html">Reports</a>
+                <a href="#" onclick="logout()">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="dashboard">
+        <div class="container">
+            <div class="dashboard-header">
+                <h1>Laboratory Dashboard</h1>
+                <p>Welcome, <span id="username">Lab Technician</span> | Role: Quality Testing Lab</p>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h3>🔬 Upload Test Results</h3>
+                    <form id="testResultForm">
+                        <div class="form-group">
+                            <label for="testBatchId">Batch ID</label>
+                            <input type="text" id="testBatchId" name="testBatchId" placeholder="e.g., ASH-2024-001" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="testType">Test Type</label>
+                            <select id="testType" name="testType" required>
+                                <option value="">Select Test Type</option>
+                                <option value="moisture">Moisture Content</option>
+                                <option value="pesticide">Pesticide Residue</option>
+                                <option value="dna">DNA Authentication</option>
+                                <option value="heavy-metals">Heavy Metals</option>
+                                <option value="microbial">Microbial Count</option>
+                                <option value="active-compounds">Active Compounds</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="testResult">Test Result</label>
+                            <input type="text" id="testResult" name="testResult" placeholder="e.g., 8.2%" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="testStatus">Status</label>
+                            <select id="testStatus" name="testStatus" required>
+                                <option value="">Select Status</option>
+                                <option value="passed">Passed</option>
+                                <option value="failed">Failed</option>
+                                <option value="pending">Pending Review</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="testMethod">Test Method</label>
+                            <input type="text" id="testMethod" name="testMethod" placeholder="e.g., HPLC, GC-MS">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="testCertificate">Upload Certificate</label>
+                            <input type="file" id="testCertificate" name="testCertificate" accept=".pdf,.jpg,.png">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="testNotes">Test Notes</label>
+                            <textarea id="testNotes" name="testNotes" rows="3" placeholder="Additional test observations..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-primary">Upload Test Results</button>
+                    </form>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>📋 Pending Tests</h3>
+                    <div id="pendingTests">
+                        <div class="test-item">
+                            <div class="test-header">
+                                <strong>ASH-2024-001</strong>
+                                <span class="priority high">High Priority</span>
+                            </div>
+                            <p>Ashwagandha - Moisture Content Test</p>
+                            <p>Received: March 20, 2024</p>
+                            <p>Due: March 22, 2024</p>
+                            <div class="test-actions">
+                                <button class="btn-primary" onclick="startTest('ASH-2024-001', 'moisture')">Start Test</button>
+                                <button class="btn-secondary" onclick="viewSample('ASH-2024-001')">View Sample</button>
+                            </div>
+                        </div>
+
+                        <div class="test-item">
+                            <div class="test-header">
+                                <strong>TUR-2024-002</strong>
+                                <span class="priority medium">Medium Priority</span>
+                            </div>
+                            <p>Turmeric - Pesticide Residue Test</p>
+                            <p>Received: March 19, 2024</p>
+                            <p>Due: March 24, 2024</p>
+                            <div class="test-actions">
+                                <button class="btn-primary" onclick="startTest('TUR-2024-002', 'pesticide')">Start Test</button>
+                                <button class="btn-secondary" onclick="viewSample('TUR-2024-002')">View Sample</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>✅ Recent Test Results</h3>
+                    <div id="recentResults">
+                        <div class="result-item passed">
+                            <div class="result-header">
+                                <strong>BRA-2024-003</strong>
+                                <span class="result-status">✅ Passed</span>
+                            </div>
+                            <p>Brahmi - DNA Authentication</p>
+                            <p>Result: Confirmed Bacopa monnieri</p>
+                            <p>Completed: March 18, 2024</p>
+                            <div class="result-actions">
+                                <button class="btn-secondary" onclick="viewCertificate('BRA-2024-003')">View Certificate</button>
+                                <button class="btn-primary" onclick="approveBatch('BRA-2024-003')">Approve Batch</button>
+                            </div>
+                        </div>
+
+                        <div class="result-item failed">
+                            <div class="result-header">
+                                <strong>NEE-2024-004</strong>
+                                <span class="result-status">❌ Failed</span>
+                            </div>
+                            <p>Neem - Heavy Metals Test</p>
+                            <p>Result: Lead levels exceeded (15 ppm)</p>
+                            <p>Completed: March 17, 2024</p>
+                            <div class="result-actions">
+                                <button class="btn-secondary" onclick="viewCertificate('NEE-2024-004')">View Certificate</button>
+                                <button class="btn-primary" onclick="rejectBatch('NEE-2024-004')">Reject Batch</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>📊 Lab Statistics</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number">156</div>
+                            <div class="stat-label">Tests This Month</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">92%</div>
+                            <div class="stat-label">Pass Rate</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">2.1</div>
+                            <div class="stat-label">Avg Days/Test</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">8</div>
+                            <div class="stat-label">Pending Tests</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>🏆 Batch Approval/Rejection</h3>
+                    <div class="form-group">
+                        <label for="approvalBatchId">Batch ID</label>
+                        <input type="text" id="approvalBatchId" placeholder="Enter batch ID">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="approvalAction">Action</label>
+                        <select id="approvalAction">
+                            <option value="">Select Action</option>
+                            <option value="approve">Approve Batch</option>
+                            <option value="reject">Reject Batch</option>
+                            <option value="conditional">Conditional Approval</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="approvalNotes">Notes</label>
+                        <textarea id="approvalNotes" rows="3" placeholder="Approval/rejection notes..."></textarea>
+                    </div>
+
+                    <button class="btn-primary" onclick="processBatchApproval()">Process Approval</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Load user info
+        document.addEventListener('DOMContentLoaded', function() {
+            const username = localStorage.getItem('username') || 'Lab Technician';
+            document.getElementById('username').textContent = username;
+        });
+
+        // Handle test result form submission
+        document.getElementById('testResultForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const testData = Object.fromEntries(formData);
+            
+            // Simulate blockchain transaction
+            console.log('Uploading test results:', testData);
+            
+            // In real implementation, this would interact with blockchain
+            alert('Test results uploaded successfully to blockchain!');
+            
+            // Reset form
+            e.target.reset();
+            
+            // Refresh pending tests
+            refreshPendingTests();
+        });
+
+        function startTest(batchId, testType) {
+            alert(`Starting ${testType} test for batch: ${batchId}`);
+            // In real implementation, this would update test status
+        }
+
+        function viewSample(batchId) {
+            alert(`Viewing sample details for batch: ${batchId}`);
+            // In real implementation, this would show sample information
+        }
+
+        function viewCertificate(batchId) {
+            alert(`Opening certificate for batch: ${batchId}`);
+            // In real implementation, this would open the certificate PDF
+        }
+
+        function approveBatch(batchId) {
+            if (confirm(`Approve batch ${batchId}?`)) {
+                console.log('Approving batch:', batchId);
+                alert('Batch approved and recorded on blockchain!');
+                refreshRecentResults();
+            }
+        }
+
+        function rejectBatch(batchId) {
+            if (confirm(`Reject batch ${batchId}?`)) {
+                console.log('Rejecting batch:', batchId);
+                alert('Batch rejected and recorded on blockchain!');
+                refreshRecentResults();
+            }
+        }
+
+        function processBatchApproval() {
+            const batchId = document.getElementById('approvalBatchId').value;
+            const action = document.getElementById('approvalAction').value;
+            const notes = document.getElementById('approvalNotes').value;
+
+            if (!batchId || !action) {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            console.log('Processing batch approval:', { batchId, action, notes });
+            alert(`Batch ${batchId} ${action} recorded on blockchain!`);
+            
+            // Clear form
+            document.getElementById('approvalBatchId').value = '';
+            document.getElementById('approvalAction').value = '';
+            document.getElementById('approvalNotes').value = '';
+        }
+
+        function refreshPendingTests() {
+            // In real implementation, this would fetch latest pending tests
+            console.log('Refreshing pending tests...');
+        }
+
+        function refreshRecentResults() {
+            // In real implementation, this would fetch latest test results
+            console.log('Refreshing recent results...');
+        }
+
+        function logout() {
+            localStorage.removeItem('userRole');
+            localStorage.removeItem('username');
+            window.location.href = 'index.html';
+        }
+    </script>
+
+    <style>
+        .test-item, .result-item {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .test-item {
+            border-left: 4px solid #ffc107;
+        }
+
+        .result-item.passed {
+            border-left: 4px solid #28a745;
+        }
+
+        .result-item.failed {
+            border-left: 4px solid #dc3545;
+        }
+
+        .test-header, .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .priority, .result-status {
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .priority.high {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .priority.medium {
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+
+        .test-actions, .result-actions {
+            margin-top: 1rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .test-actions button, .result-actions button {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+    </style>
+</body>
+</html>
