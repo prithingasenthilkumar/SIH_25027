@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - AyurTrace</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="login-container">
+        <form class="login-form" id="loginForm">
+            <h2>🌿 AyurTrace Login</h2>
+            
+            <div class="form-group">
+                <label for="role">Select Role</label>
+                <select id="role" name="role" required>
+                    <option value="">Choose your role</option>
+                    <option value="processor">Processor</option>
+                    <option value="lab">Laboratory</option>
+                    <option value="manufacturer">Manufacturer</option>
+                    <option value="regulator">Regulator/Manager</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <button type="submit" class="btn-primary" style="width: 100%;">Login</button>
+            
+            <div style="text-align: center; margin-top: 1rem;">
+                <a href="index.html" style="color: #4CAF50; text-decoration: none;">← Back to Home</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const role = document.getElementById('role').value;
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Simple authentication simulation
+            if (username && password && role) {
+                localStorage.setItem('userRole', role);
+                localStorage.setItem('username', username);
+                
+                // Redirect to appropriate dashboard
+                switch(role) {
+                    case 'processor':
+                        window.location.href = 'processor-dashboard.html';
+                        break;
+                    case 'lab':
+                        window.location.href = 'lab-dashboard.html';
+                        break;
+                    case 'manufacturer':
+                        window.location.href = 'manufacturer-dashboard.html';
+                        break;
+                    case 'regulator':
+                        window.location.href = 'regulator-dashboard.html';
+                        break;
+                }
+            } else {
+                alert('Please fill in all fields');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manufacturer Dashboard - AyurTrace</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">🌿 AyurTrace</div>
+            <div class="nav-menu">
+                <a href="index.html">Home</a>
+                <a href="reports.html">Reports</a>
+                <a href="#" onclick="logout()">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="dashboard">
+        <div class="container">
+            <div class="dashboard-header">
+                <h1>Manufacturer Dashboard</h1>
+                <p>Welcome, <span id="username">Manufacturer</span> | Role: Product Manufacturing</p>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h3>✅ Verified Herbs Inventory</h3>
+                    <div class="search-bar">
+                        <input type="text" id="herbSearch" placeholder="Search herbs..." onkeyup="filterHerbs()">
+                        <select id="statusFilter" onchange="filterHerbs()">
+                            <option value="">All Status</option>
+                            <option value="verified">Verified</option>
+                            <option value="pending">Pending</option>
+                            <option value="rejected">Rejected</option>
+                        </select>
+                    </div>
+                    
+                    <div id="herbInventory">
+                        <div class="herb-item verified">
+                            <div class="herb-header">
+                                <strong>ASH-2024-001</strong>
+                                <span class="status verified">✅ Verified</span>
+                            </div>
+                            <p>Ashwagandha Root - 50kg</p>
+                            <p>Quality Score: 98.5%</p>
+                            <p>Expiry: March 2026</p>
+                            <div class="herb-actions">
+                                <button class="btn-secondary" onclick="viewHerbDetails('ASH-2024-001')">View Details</button>
+                                <button class="btn-primary" onclick="useInFormulation('ASH-2024-001')">Use in Product</button>
+                            </div>
+                        </div>
+
+                        <div class="herb-item verified">
+                            <div class="herb-header">
+                                <strong>TUR-2024-002</strong>
+                                <span class="status verified">✅ Verified</span>
+                            </div>
+                            <p>Turmeric Powder - 75kg</p>
+                            <p>Quality Score: 96.2%</p>
+                            <p>Expiry: February 2026</p>
+                            <div class="herb-actions">
+                                <button class="btn-secondary" onclick="viewHerbDetails('TUR-2024-002')">View Details</button>
+                                <button class="btn-primary" onclick="useInFormulation('TUR-2024-002')">Use in Product</button>
+                            </div>
+                        </div>
+
+                        <div class="herb-item pending">
+                            <div class="herb-header">
+                                <strong>BRA-2024-003</strong>
+                                <span class="status pending">⏳ Lab Testing</span>
+                            </div>
+                            <p>Brahmi Extract - 30kg</p>
+                            <p>Expected: March 25, 2024</p>
+                            <div class="herb-actions">
+                                <button class="btn-secondary" onclick="viewHerbDetails('BRA-2024-003')">View Details</button>
+                                <button class="btn-secondary" disabled>Pending Verification</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>🧪 Create New Formulation</h3>
+                    <form id="formulationForm">
+                        <div class="form-group">
+                            <label for="productName">Product Name</label>
+                            <input type="text" id="productName" name="productName" placeholder="e.g., Stress Relief Capsules" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="productType">Product Type</label>
+                            <select id="productType" name="productType" required>
+                                <option value="">Select Type</option>
+                                <option value="capsules">Capsules</option>
+                                <option value="tablets">Tablets</option>
+                                <option value="powder">Powder</option>
+                                <option value="oil">Oil</option>
+                                <option value="syrup">Syrup</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Herb Ingredients</label>
+                            <div id="ingredientsList">
+                                <div class="ingredient-item">
+                                    <select name="herbId[]" required>
+                                        <option value="">Select Herb</option>
+                                        <option value="ASH-2024-001">Ashwagandha (ASH-2024-001)</option>
+                                        <option value="TUR-2024-002">Turmeric (TUR-2024-002)</option>
+                                    </select>
+                                    <input type="number" name="quantity[]" placeholder="Quantity (g)" min="1" required>
+                                    <button type="button" onclick="removeIngredient(this)">Remove</button>
+                                </div>
+                            </div>
+                            <button type="button" class="btn-secondary" onclick="addIngredient()">Add Ingredient</button>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="batchSize">Batch Size (units)</label>
+                            <input type="number" id="batchSize" name="batchSize" min="1" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="manufacturingNotes">Manufacturing Notes</label>
+                            <textarea id="manufacturingNotes" name="manufacturingNotes" rows="3" placeholder="Special instructions, processes..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-primary">Create Formulation</button>
+                    </form>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>📦 Active Productions</h3>
+                    <div id="activeProductions">
+                        <div class="production-item">
+                            <div class="production-header">
+                                <strong>PROD-2024-001</strong>
+                                <span class="status manufacturing">🏭 Manufacturing</span>
+                            </div>
+                            <p>Stress Relief Capsules</p>
+                            <p>Batch Size: 1000 units</p>
+                            <p>Progress: 65%</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 65%"></div>
+                            </div>
+                            <div class="production-actions">
+                                <button class="btn-secondary" onclick="updateProduction('PROD-2024-001')">Update Progress</button>
+                                <button class="btn-primary" onclick="requestQR('PROD-2024-001')">Request QR Codes</button>
+                            </div>
+                        </div>
+
+                        <div class="production-item">
+                            <div class="production-header">
+                                <strong>PROD-2024-002</strong>
+                                <span class="status completed">✅ Completed</span>
+                            </div>
+                            <p>Immunity Booster Tablets</p>
+                            <p>Batch Size: 500 units</p>
+                            <p>Completed: March 20, 2024</p>
+                            <div class="production-actions">
+                                <button class="btn-secondary" onclick="viewProduction('PROD-2024-002')">View Details</button>
+                                <button class="btn-primary" onclick="generateQRBatch('PROD-2024-002')">Generate QR Batch</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>🏷️ QR Code Management</h3>
+                    <div class="form-group">
+                        <label for="qrProductId">Select Product</label>
+                        <select id="qrProductId">
+                            <option value="">Select Product</option>
+                            <option value="PROD-2024-001">Stress Relief Capsules</option>
+                            <option value="PROD-2024-002">Immunity Booster Tablets</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="qrQuantity">Number of QR Codes</label>
+                        <input type="number" id="qrQuantity" min="1" max="10000" placeholder="e.g., 1000">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="qrFormat">QR Code Format</label>
+                        <select id="qrFormat">
+                            <option value="individual">Individual Product Codes</option>
+                            <option value="batch">Batch Code</option>
+                            <option value="both">Both Individual & Batch</option>
+                        </select>
+                    </div>
+
+                    <button class="btn-primary" onclick="requestQRCodes()">Request QR Codes</button>
+                    
+                    <div id="qrRequestStatus" class="hidden">
+                        <h4>QR Code Request Status:</h4>
+                        <p>Request ID: <span id="requestId"></span></p>
+                        <p>Status: <span id="requestStatus">Processing...</span></p>
+                        <button class="btn-secondary" onclick="downloadQRBatch()">Download QR Codes</button>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>📊 Manufacturing Statistics</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number">12</div>
+                            <div class="stat-label">Products This Month</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">8,500</div>
+                            <div class="stat-label">Units Produced</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">99.2%</div>
+                            <div class="stat-label">Quality Pass Rate</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">3</div>
+                            <div class="stat-label">Active Productions</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Load user info
+        document.addEventListener('DOMContentLoaded', function() {
+            const username = localStorage.getItem('username') || 'Manufacturer';
+            document.getElementById('username').textContent = username;
+        });
+
+        // Handle formulation form submission
+        document.getElementById('formulationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const formulationData = Object.fromEntries(formData);
+            
+            // Get ingredients data
+            const herbIds = formData.getAll('herbId[]');
+            const quantities = formData.getAll('quantity[]');
+            const ingredients = herbIds.map((id, index) => ({
+                herbId: id,
+                quantity: quantities[index]
+            }));
+            
+            formulationData.ingredients = ingredients;
+            
+            console.log('Creating formulation:', formulationData);
+            alert('Formulation created successfully and recorded on blockchain!');
+            
+            // Reset form
+            e.target.reset();
+            refreshActiveProductions();
+        });
+
+        function filterHerbs() {
+            const searchTerm = document.getElementById('herbSearch').value.toLowerCase();
+            const statusFilter = document.getElementById('statusFilter').value;
+            const herbItems = document.querySelectorAll('.herb-item');
+            
+            herbItems.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                const status = item.classList.contains('verified') ? 'verified' : 
+                              item.classList.contains('pending') ? 'pending' : 'rejected';
+                
+                const matchesSearch = text.includes(searchTerm);
+                const matchesStatus = !statusFilter || status === statusFilter;
+                
+                item.style.display = matchesSearch && matchesStatus ? 'block' : 'none';
+            });
+        }
+
+        function viewHerbDetails(herbId) {
+            window.open(`product-details.html?id=${herbId}`, '_blank');
+        }
+
+        function useInFormulation(herbId) {
+            // Auto-select the herb in formulation form
+            const herbSelect = document.querySelector('select[name="herbId[]"]');
+            herbSelect.value = herbId;
+            alert(`${herbId} selected for formulation`);
+        }
+
+        function addIngredient() {
+            const ingredientsList = document.getElementById('ingredientsList');
+            const newIngredient = document.createElement('div');
+            newIngredient.className = 'ingredient-item';
+            newIngredient.innerHTML = `
+                <select name="herbId[]" required>
+                    <option value="">Select Herb</option>
+                    <option value="ASH-2024-001">Ashwagandha (ASH-2024-001)</option>
+                    <option value="TUR-2024-002">Turmeric (TUR-2024-002)</option>
+                </select>
+                <input type="number" name="quantity[]" placeholder="Quantity (g)" min="1" required>
+                <button type="button" onclick="removeIngredient(this)">Remove</button>
+            `;
+            ingredientsList.appendChild(newIngredient);
+        }
+
+        function removeIngredient(button) {
+            button.parentElement.remove();
+        }
+
+        function updateProduction(productionId) {
+            alert(`Opening production update for: ${productionId}`);
+        }
+
+        function requestQR(productionId) {
+            document.getElementById('qrProductId').value = productionId;
+            alert(`QR code request initiated for: ${productionId}`);
+        }
+
+        function viewProduction(productionId) {
+            alert(`Viewing production details for: ${productionId}`);
+        }
+
+        function generateQRBatch(productionId) {
+            alert(`Generating QR code batch for: ${productionId}`);
+        }
+
+        function requestQRCodes() {
+            const productId = document.getElementById('qrProductId').value;
+            const quantity = document.getElementById('qrQuantity').value;
+            const format = document.getElementById('qrFormat').value;
+            
+            if (!productId || !quantity || !format) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            // Generate request ID
+            const requestId = 'QR-' + Date.now();
+            document.getElementById('requestId').textContent = requestId;
+            document.getElementById('qrRequestStatus').classList.remove('hidden');
+            
+            // Simulate processing
+            setTimeout(() => {
+                document.getElementById('requestStatus').textContent = 'Ready for Download';
+            }, 3000);
+            
+            console.log('QR code request:', { productId, quantity, format });
+        }
+
+        function downloadQRBatch() {
+            alert('QR code batch download started');
+        }
+
+        function refreshActiveProductions() {
+            console.log('Refreshing active productions...');
+        }
+
+        function logout() {
+            localStorage.removeItem('userRole');
+            localStorage.removeItem('username');
+            window.location.href = 'index.html';
+        }
+    </script>
+
+    <style>
+        .search-bar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .search-bar input, .search-bar select {
+            flex: 1;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .herb-item, .production-item {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .herb-item.verified {
+            border-left: 4px solid #28a745;
+        }
+
+        .herb-item.pending {
+            border-left: 4px solid #ffc107;
+        }
+
+        .herb-item.rejected {
+            border-left: 4px solid #dc3545;
+        }
+
+        .production-item {
+            border-left: 4px solid #007bff;
+        }
+
+        .herb-header, .production-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .status {
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .status.verified {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status.manufacturing {
+            background: #cce5ff;
+            color: #004085;
+        }
+
+        .status.completed {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .herb-actions, .production-actions {
+            margin-top: 1rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .herb-actions button, .production-actions button {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        .ingredient-item {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            align-items: center;
+        }
+
+        .ingredient-item select, .ingredient-item input {
+            flex: 1;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .ingredient-item button {
+            padding: 0.5rem 1rem;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            margin: 0.5rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #28a745;
+            border-radius: 4px;
+            transition: width 0.3s;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+    </style>
+</body>
+</html>
