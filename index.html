@@ -57,26 +57,38 @@
             <div class="container">
                 <h2>How It Works</h2>
                 <div class="process-steps">
-                    <div class="step">
-                        <div class="step-number">1</div>
-                        <h3>Harvest</h3>
-                        <p>Farmers record harvest data on blockchain</p>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">2</div>
-                        <h3>Process</h3>
-                        <p>Processing steps tracked and verified</p>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">3</div>
-                        <h3>Test</h3>
-                        <p>Lab certificates uploaded to blockchain</p>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">4</div>
-                        <h3>Verify</h3>
-                        <p>Consumers scan QR for full provenance</p>
-                    </div>
+                    <a href="harvest.html" class="step-link">
+                        <div class="step clickable-step">
+                            <div class="step-number">1</div>
+                            <h3>Harvest</h3>
+                            <p>Farmers record harvest data on blockchain</p>
+                            <div class="step-arrow">→</div>
+                        </div>
+                    </a>
+                    <a href="process.html" class="step-link">
+                        <div class="step clickable-step">
+                            <div class="step-number">2</div>
+                            <h3>Process</h3>
+                            <p>Processing steps tracked and verified</p>
+                            <div class="step-arrow">→</div>
+                        </div>
+                    </a>
+                    <a href="test.html" class="step-link">
+                        <div class="step clickable-step">
+                            <div class="step-number">3</div>
+                            <h3>Test</h3>
+                            <p>Lab certificates uploaded to blockchain</p>
+                            <div class="step-arrow">→</div>
+                        </div>
+                    </a>
+                    <a href="verify.html" class="step-link">
+                        <div class="step clickable-step">
+                            <div class="step-number">4</div>
+                            <h3>Verify</h3>
+                            <p>Consumers scan QR for full provenance</p>
+                            <div class="step-arrow">→</div>
+                        </div>
+                    </a>
                 </div>
             </div>
         </section>
@@ -88,7 +100,107 @@
         </div>
     </footer>
 
+    <!-- Step Modal -->
+    <div id="stepModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close" onclick="closeStepModal()">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
     <script src="qr-scanner.js"></script>
     <script src="app.js"></script>
+    <script src="about-navigation-test.js"></script>
+    <script>
+        function openStepModal(step) {
+            const modal = document.getElementById('stepModal');
+            const content = document.getElementById('modalContent');
+            
+            const stepData = {
+                harvest: {
+                    title: '🌱 Harvest Stage',
+                    content: `
+                        <h2>Farm to Blockchain</h2>
+                        <p>The journey begins at certified organic farms where herbs are carefully cultivated and harvested.</p>
+                        <ul>
+                            <li><strong>Location Tracking:</strong> GPS coordinates recorded</li>
+                            <li><strong>Harvest Date:</strong> Exact timing for optimal potency</li>
+                            <li><strong>Weather Conditions:</strong> Environmental factors logged</li>
+                            <li><strong>Farmer Certification:</strong> Verified organic credentials</li>
+                        </ul>
+                        <button class="btn-primary" onclick="window.open('processor-dashboard.html', '_blank')">View Processor Dashboard</button>
+                    `
+                },
+                process: {
+                    title: '⚙️ Processing Stage',
+                    content: `
+                        <h2>Traditional Methods, Modern Tracking</h2>
+                        <p>Herbs undergo traditional Ayurvedic processing with complete digital documentation.</p>
+                        <ul>
+                            <li><strong>Processing Method:</strong> Sun-drying, grinding, extraction</li>
+                            <li><strong>Temperature Control:</strong> Optimal conditions maintained</li>
+                            <li><strong>Duration Tracking:</strong> Processing time recorded</li>
+                            <li><strong>Quality Checks:</strong> Multiple inspection points</li>
+                        </ul>
+                        <button class="btn-primary" onclick="window.open('processor-dashboard.html', '_blank')">View Processing Hub</button>
+                    `
+                },
+                test: {
+                    title: '🔬 Testing Stage',
+                    content: `
+                        <h2>Scientific Validation</h2>
+                        <p>Rigorous laboratory testing ensures purity, potency, and safety of every batch.</p>
+                        <ul>
+                            <li><strong>Purity Testing:</strong> Heavy metals, pesticides, contaminants</li>
+                            <li><strong>Potency Analysis:</strong> Active compound verification</li>
+                            <li><strong>DNA Authentication:</strong> Species confirmation</li>
+                            <li><strong>Microbial Testing:</strong> Safety assurance</li>
+                        </ul>
+                        <button class="btn-primary" onclick="window.open('lab-dashboard.html', '_blank')">View Lab Dashboard</button>
+                    `
+                },
+                verify: {
+                    title: '✅ Verification Stage',
+                    content: `
+                        <h2>Consumer Transparency</h2>
+                        <p>Complete traceability through QR codes gives consumers full visibility into their herbs' journey.</p>
+                        <ul>
+                            <li><strong>QR Code Scanning:</strong> Instant access to full history</li>
+                            <li><strong>Blockchain Verification:</strong> Immutable record validation</li>
+                            <li><strong>Certificate Access:</strong> Lab reports and certifications</li>
+                            <li><strong>Supply Chain Map:</strong> Visual journey tracking</li>
+                        </ul>
+                        <button class="btn-primary" onclick="document.getElementById('start-scan').click(); closeStepModal()">Start QR Scanning</button>
+                    `
+                }
+            };
+            
+            content.innerHTML = `
+                <div class="step-modal-header">
+                    <h1>${stepData[step].title}</h1>
+                </div>
+                <div class="step-modal-body">
+                    ${stepData[step].content}
+                </div>
+            `;
+            
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeStepModal() {
+            const modal = document.getElementById('stepModal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('stepModal');
+            if (event.target === modal) {
+                closeStepModal();
+            }
+        }
+    </script>
 </body>
 </html>

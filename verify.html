@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verification Stage - AyurTrace</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">🌿 AyurTrace</div>
+            <div class="nav-menu">
+                <a href="index.html">Home</a>
+                <a href="index.html#about">About</a>
+                <a href="login.html">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="page-content">
+        <div class="container">
+            <div class="page-header">
+                <h1>✅ Verification Stage</h1>
+                <p>Complete Transparency for Consumers</p>
+            </div>
+
+            <div class="content-grid">
+                <div class="content-card">
+                    <h2>QR Code Verification</h2>
+                    <p>Every product comes with a unique QR code that provides instant access to the complete journey of your Ayurvedic herbs.</p>
+                    
+                    <div class="qr-demo">
+                        <div class="qr-code-sample">
+                            <div class="qr-placeholder">
+                                <span>📱</span>
+                                <p>Sample QR Code</p>
+                            </div>
+                        </div>
+                        <div class="qr-info">
+                            <h4>What You Get:</h4>
+                            <ul>
+                                <li>Complete supply chain history</li>
+                                <li>Farm origin details</li>
+                                <li>Processing information</li>
+                                <li>Lab test certificates</li>
+                                <li>Blockchain verification</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h2>Blockchain Verification</h2>
+                    <p>All data is stored on an immutable blockchain network, ensuring authenticity and preventing tampering.</p>
+                    
+                    <div class="blockchain-features">
+                        <div class="feature-item">
+                            <span class="feature-icon">🔒</span>
+                            <div>
+                                <h4>Immutable Records</h4>
+                                <p>Data cannot be altered once recorded</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🔍</span>
+                            <div>
+                                <h4>Transparent Tracking</h4>
+                                <p>Complete visibility of the supply chain</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">⚡</span>
+                            <div>
+                                <h4>Instant Verification</h4>
+                                <p>Real-time authenticity confirmation</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h2>Consumer Benefits</h2>
+                    <div class="benefits-grid">
+                        <div class="benefit-item">
+                            <h4>🌱 Authenticity Guarantee</h4>
+                            <p>Verify genuine Ayurvedic herbs with scientific backing</p>
+                        </div>
+                        <div class="benefit-item">
+                            <h4>🏥 Safety Assurance</h4>
+                            <p>Access complete lab test results and safety certificates</p>
+                        </div>
+                        <div class="benefit-item">
+                            <h4>🌍 Sustainability</h4>
+                            <p>Support eco-friendly and ethical farming practices</p>
+                        </div>
+                        <div class="benefit-item">
+                            <h4>📊 Quality Metrics</h4>
+                            <p>View potency levels and active compound concentrations</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h2>Try QR Scanning</h2>
+                    <p>Experience the verification process with our interactive QR scanner.</p>
+                    
+                    <div class="scanner-section">
+                        <button id="demo-scan" class="btn-primary">Start QR Scanner Demo</button>
+                        <p class="scanner-note">This will demonstrate how consumers can verify their products</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-section">
+                <h2>Complete Journey</h2>
+                <div class="journey-summary">
+                    <div class="journey-step">
+                        <a href="harvest.html">
+                            <div class="step-number">1</div>
+                            <h4>Harvest</h4>
+                        </a>
+                    </div>
+                    <div class="journey-arrow">→</div>
+                    <div class="journey-step">
+                        <a href="process.html">
+                            <div class="step-number">2</div>
+                            <h4>Process</h4>
+                        </a>
+                    </div>
+                    <div class="journey-arrow">→</div>
+                    <div class="journey-step">
+                        <a href="test.html">
+                            <div class="step-number">3</div>
+                            <h4>Test</h4>
+                        </a>
+                    </div>
+                    <div class="journey-arrow">→</div>
+                    <div class="journey-step current">
+                        <div class="step-number">4</div>
+                        <h4>Verify</h4>
+                    </div>
+                </div>
+                
+                <div class="final-actions">
+                    <a href="index.html" class="btn-secondary">Back to Home</a>
+                    <a href="index.html#home" class="btn-primary">Try QR Scanner</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 AyurTrace. Securing Ayurvedic Heritage with Blockchain.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('demo-scan').addEventListener('click', function() {
+            // Redirect to main page QR scanner
+            window.location.href = 'index.html#home';
+            // Focus on QR scanner after redirect
+            setTimeout(() => {
+                const scanner = document.getElementById('start-scan');
+                if (scanner) {
+                    scanner.scrollIntoView({ behavior: 'smooth' });
+                    scanner.focus();
+                }
+            }, 500);
+        });
+    </script>
+</body>
+</html>
