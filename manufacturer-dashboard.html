@@ -13,6 +13,7 @@
             <div class="nav-menu">
                 <a href="index.html">Home</a>
                 <a href="reports.html">Reports</a>
+                <button id="themeToggle" onclick="toggleTheme()">◐</button>
                 <a href="#" onclick="logout()">Logout</a>
             </div>
         </div>
@@ -229,14 +230,53 @@
     </main>
 
     <script>
-        // Load user info
+        // Load user info and fetch data
         document.addEventListener('DOMContentLoaded', function() {
             const username = localStorage.getItem('username') || 'Manufacturer';
             document.getElementById('username').textContent = username;
+            
+            // Load saved theme
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-theme');
+                document.getElementById('themeToggle').textContent = '◑';
+            }
+            
+            loadHerbs();
         });
 
+        // Load herbs from database
+        async function loadHerbs() {
+            try {
+                const response = await fetch('api/herbs.php');
+                const herbs = await response.json();
+                displayHerbs(herbs);
+            } catch (error) {
+                console.error('Error loading herbs:', error);
+            }
+        }
+
+        function displayHerbs(herbs) {
+            const container = document.getElementById('herbInventory');
+            container.innerHTML = herbs.map(herb => `
+                <div class="herb-item ${herb.status}">
+                    <div class="herb-header">
+                        <strong>${herb.id}</strong>
+                        <span class="status ${herb.status}">${herb.status === 'verified' ? '✅ Verified' : '⏳ Lab Testing'}</span>
+                    </div>
+                    <p>${herb.name} - ${herb.quantity}kg</p>
+                    ${herb.quality_score ? `<p>Quality Score: ${herb.quality_score}%</p>` : ''}
+                    <p>Expiry: ${new Date(herb.expiry_date).toLocaleDateString()}</p>
+                    <div class="herb-actions">
+                        <button class="btn-secondary" onclick="viewHerbDetails('${herb.id}')">View Details</button>
+                        <button class="btn-primary" ${herb.status !== 'verified' ? 'disabled' : ''} onclick="useInFormulation('${herb.id}')">${herb.status === 'verified' ? 'Use in Product' : 'Pending Verification'}</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
         // Handle formulation form submission
-        document.getElementById('formulationForm').addEventListener('submit', function(e) {
+        document.getElementById('formulationForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const formData = new FormData(e.target);
@@ -252,12 +292,24 @@
             
             formulationData.ingredients = ingredients;
             
-            console.log('Creating formulation:', formulationData);
-            alert('Formulation created successfully and recorded on blockchain!');
-            
-            // Reset form
-            e.target.reset();
-            refreshActiveProductions();
+            try {
+                const response = await fetch('api/formulations.php', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(formulationData)
+                });
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert('Formulation created successfully and recorded on blockchain!');
+                    e.target.reset();
+                } else {
+                    alert('Error creating formulation');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error creating formulation');
+            }
         });
 
         function filterHerbs() {
@@ -354,6 +406,13 @@
 
         function refreshActiveProductions() {
             console.log('Refreshing active productions...');
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark-theme');
+            const isDark = document.body.classList.contains('dark-theme');
+            document.getElementById('themeToggle').textContent = isDark ? '◑' : '◐';
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
         }
 
         function logout() {

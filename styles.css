@@ -8,7 +8,9 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: #333;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #006994 0%, #004d6b 100%);
+    position: relative;
+    overflow-x: hidden;
 }
 
 .container {
@@ -24,7 +26,7 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 1000;
+    z-index: 1001;
     box-shadow: 0 2px 20px rgba(0,0,0,0.1);
 }
 
@@ -68,6 +70,112 @@ body {
     text-align: center;
     color: white;
     padding: 100px 20px 50px;
+    position: relative;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, #fff, transparent),
+        radial-gradient(1px 1px at 40px 70px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+        radial-gradient(2px 2px at 130px 80px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 160px 30px, #fff, transparent),
+        radial-gradient(2px 2px at 200px 90px, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 240px 50px, #fff, transparent),
+        radial-gradient(2px 2px at 280px 20px, rgba(255,255,255,0.9), transparent),
+        radial-gradient(1px 1px at 320px 100px, #fff, transparent),
+        radial-gradient(1px 1px at 360px 60px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(2px 2px at 60px 120px, #fff, transparent),
+        radial-gradient(1px 1px at 100px 150px, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 180px 110px, #fff, transparent),
+        radial-gradient(2px 2px at 220px 140px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 300px 130px, #fff, transparent),
+        radial-gradient(1px 1px at 340px 160px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(2px 2px at 80px 180px, #fff, transparent),
+        radial-gradient(1px 1px at 140px 170px, rgba(255,255,255,0.9), transparent),
+        radial-gradient(1px 1px at 260px 190px, #fff, transparent),
+        radial-gradient(2px 2px at 380px 180px, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 50px 10px, #fff, transparent),
+        radial-gradient(1px 1px at 120px 25px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(2px 2px at 190px 15px, #fff, transparent),
+        radial-gradient(1px 1px at 250px 35px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 310px 45px, #fff, transparent),
+        radial-gradient(2px 2px at 370px 25px, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 30px 85px, #fff, transparent),
+        radial-gradient(1px 1px at 110px 95px, rgba(255,255,255,0.9), transparent),
+        radial-gradient(2px 2px at 170px 75px, #fff, transparent),
+        radial-gradient(1px 1px at 230px 105px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 290px 85px, #fff, transparent),
+        radial-gradient(1px 1px at 350px 115px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(2px 2px at 70px 145px, #fff, transparent),
+        radial-gradient(1px 1px at 150px 135px, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 210px 165px, #fff, transparent),
+        radial-gradient(2px 2px at 270px 155px, rgba(255,255,255,0.9), transparent),
+        radial-gradient(1px 1px at 330px 175px, #fff, transparent),
+        radial-gradient(1px 1px at 390px 145px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 15px 55px, #fff, transparent),
+        radial-gradient(2px 2px at 75px 65px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 135px 45px, #fff, transparent),
+        radial-gradient(1px 1px at 195px 75px, rgba(255,255,255,0.7), transparent),
+        radial-gradient(2px 2px at 255px 55px, #fff, transparent),
+        radial-gradient(1px 1px at 315px 65px, rgba(255,255,255,0.9), transparent),
+        radial-gradient(1px 1px at 375px 45px, #fff, transparent),
+        radial-gradient(1px 1px at 25px 125px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(2px 2px at 85px 115px, #fff, transparent),
+        radial-gradient(1px 1px at 145px 105px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 205px 125px, #fff, transparent),
+        radial-gradient(2px 2px at 265px 115px, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 325px 105px, #fff, transparent),
+        radial-gradient(1px 1px at 385px 125px, rgba(255,255,255,0.9), transparent),
+        radial-gradient(1px 1px at 45px 185px, #fff, transparent),
+        radial-gradient(2px 2px at 105px 175px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 165px 195px, #fff, transparent),
+        radial-gradient(1px 1px at 225px 185px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(2px 2px at 285px 175px, #fff, transparent),
+        radial-gradient(1px 1px at 345px 195px, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 5px 5px, #fff, transparent),
+        radial-gradient(1px 1px at 35px 15px, rgba(255,255,255,0.5), transparent),
+        radial-gradient(2px 2px at 65px 5px, #fff, transparent),
+        radial-gradient(1px 1px at 95px 15px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 125px 5px, #fff, transparent),
+        radial-gradient(1px 1px at 155px 15px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(2px 2px at 185px 5px, #fff, transparent),
+        radial-gradient(1px 1px at 215px 15px, rgba(255,255,255,0.9), transparent),
+        radial-gradient(1px 1px at 245px 5px, #fff, transparent),
+        radial-gradient(1px 1px at 275px 15px, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 305px 5px, #fff, transparent),
+        radial-gradient(2px 2px at 335px 15px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 365px 5px, #fff, transparent),
+        radial-gradient(1px 1px at 395px 15px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 10px 200px, #fff, transparent),
+        radial-gradient(2px 2px at 40px 190px, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 70px 200px, #fff, transparent),
+        radial-gradient(1px 1px at 100px 190px, rgba(255,255,255,0.9), transparent),
+        radial-gradient(1px 1px at 130px 200px, #fff, transparent),
+        radial-gradient(2px 2px at 160px 190px, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 190px 200px, #fff, transparent),
+        radial-gradient(1px 1px at 220px 190px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 250px 200px, #fff, transparent),
+        radial-gradient(2px 2px at 280px 190px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 310px 200px, #fff, transparent),
+        radial-gradient(1px 1px at 340px 190px, rgba(255,255,255,0.9), transparent),
+        radial-gradient(1px 1px at 370px 200px, #fff, transparent),
+        radial-gradient(1px 1px at 400px 190px, rgba(255,255,255,0.7), transparent);
+    background-repeat: repeat;
+    background-size: 400px 200px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
 }
 
 .hero-content h1 {
@@ -129,6 +237,126 @@ body {
     background: transparent;
     border: 2px solid #4CAF50;
     color: black;
+}
+
+.herb-actions .btn-secondary {
+    background: #007bff;
+    border: 2px solid #007bff;
+    color: white;
+}
+
+.herb-actions .btn-secondary:disabled {
+    background: #ffc107;
+    border: 2px solid #ffc107;
+    color: #212529;
+}
+
+.form-group .btn-secondary {
+    background: #dda0dd;
+    border: none;
+    color: white;
+}
+
+.production-actions .btn-secondary {
+    background: #007bff;
+    border: 2px solid #007bff;
+    color: white;
+}
+
+#qrRequestStatus .btn-secondary {
+    background: black;
+    border: 2px solid black;
+    color: white;
+}
+
+#themeToggle {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.3rem;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s;
+    text-decoration: none;
+}
+
+#themeToggle:hover {
+    color: #4CAF50;
+}
+
+.dark-theme {
+    background: #1a1a1a !important;
+    color: #fff !important;
+}
+
+.dark-theme .navbar {
+    background: rgba(0, 0, 0, 0.9) !important;
+}
+
+.dark-theme .dashboard {
+    background: #1a1a1a !important;
+}
+
+.dark-theme .dashboard-header,
+.dark-theme .dashboard-card {
+    background: #2d2d2d !important;
+    color: #fff !important;
+}
+
+.dark-theme .herb-item,
+.dark-theme .production-item,
+.dark-theme .stat-item {
+    background: #333 !important;
+    color: #fff !important;
+}
+
+.dark-theme input,
+.dark-theme select,
+.dark-theme textarea {
+    background: #444 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+}
+
+.dark-theme .search-bar input,
+.dark-theme .search-bar select,
+.dark-theme .ingredient-item input,
+.dark-theme .ingredient-item select {
+    border: 1px solid #fff !important;
+}
+
+.dark-theme input::placeholder,
+.dark-theme textarea::placeholder {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.dark-theme .nav-menu a {
+    color: #fff !important;
+}
+
+.dark-theme #themeToggle {
+    color: #fff !important;
+}
+
+.dark-theme .nav-menu a:hover,
+.dark-theme #themeToggle:hover {
+    color: #4CAF50 !important;
+}
+
+.dark-theme .form-group label {
+    color: #fff !important;
+}
+
+.dark-theme h1,
+.dark-theme h2,
+.dark-theme h3,
+.dark-theme p {
+    color: #fff !important;
+}
+
+.dark-theme .stat-label {
+    color: #ccc !important;
 }
 
 .btn-primary:hover, .btn-secondary:hover {
@@ -313,8 +541,25 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #006994 0%, #004d6b 100%);
     padding: 20px;
+}
+
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(0);
+    animation: ripple-animation 0.8s ease-out;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+@keyframes ripple-animation {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
 }
 
 .login-form {
