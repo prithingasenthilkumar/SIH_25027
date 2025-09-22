@@ -1,0 +1,111 @@
+{
+  "name": "ayurtrace-network",
+  "version": "1.0.0",
+  "client": {
+    "organization": "FarmersOrg",
+    "connection": {
+      "timeout": {
+        "peer": {
+          "endorser": "300"
+        }
+      }
+    }
+  },
+  "organizations": {
+    "FarmersOrg": {
+      "mspid": "FarmersOrgMSP",
+      "peers": ["peer0.farmers.ayurtrace.com"],
+      "certificateAuthorities": ["ca.farmers.ayurtrace.com"]
+    },
+    "LabsOrg": {
+      "mspid": "LabsOrgMSP",
+      "peers": ["peer0.labs.ayurtrace.com"],
+      "certificateAuthorities": ["ca.labs.ayurtrace.com"]
+    },
+    "ProcessorsOrg": {
+      "mspid": "ProcessorsOrgMSP",
+      "peers": ["peer0.processors.ayurtrace.com"],
+      "certificateAuthorities": ["ca.processors.ayurtrace.com"]
+    },
+    "RegulatorsOrg": {
+      "mspid": "RegulatorsOrgMSP",
+      "peers": ["peer0.regulators.ayurtrace.com"],
+      "certificateAuthorities": ["ca.regulators.ayurtrace.com"]
+    }
+  },
+  "orderers": {
+    "orderer.ayurtrace.com": {
+      "url": "grpcs://localhost:7050",
+      "tlsCACerts": {
+        "pem": "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----"
+      }
+    }
+  },
+  "peers": {
+    "peer0.farmers.ayurtrace.com": {
+      "url": "grpcs://localhost:7051",
+      "tlsCACerts": {
+        "pem": "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----"
+      }
+    },
+    "peer0.labs.ayurtrace.com": {
+      "url": "grpcs://localhost:8051",
+      "tlsCACerts": {
+        "pem": "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----"
+      }
+    },
+    "peer0.processors.ayurtrace.com": {
+      "url": "grpcs://localhost:9051",
+      "tlsCACerts": {
+        "pem": "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----"
+      }
+    },
+    "peer0.regulators.ayurtrace.com": {
+      "url": "grpcs://localhost:10051",
+      "tlsCACerts": {
+        "pem": "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----"
+      }
+    }
+  },
+  "certificateAuthorities": {
+    "ca.farmers.ayurtrace.com": {
+      "url": "https://localhost:7054",
+      "caName": "ca-farmers",
+      "tlsCACerts": {
+        "pem": "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----"
+      }
+    },
+    "ca.labs.ayurtrace.com": {
+      "url": "https://localhost:8054",
+      "caName": "ca-labs",
+      "tlsCACerts": {
+        "pem": "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----"
+      }
+    }
+  },
+  "channels": {
+    "supply-chain-channel": {
+      "orderers": ["orderer.ayurtrace.com"],
+      "peers": {
+        "peer0.farmers.ayurtrace.com": {
+          "endorsingPeer": true,
+          "chaincodeQuery": true,
+          "ledgerQuery": true,
+          "eventSource": true
+        },
+        "peer0.labs.ayurtrace.com": {
+          "endorsingPeer": true,
+          "chaincodeQuery": true,
+          "ledgerQuery": true,
+          "eventSource": true
+        },
+        "peer0.processors.ayurtrace.com": {
+          "endorsingPeer": true,
+          "chaincodeQuery": true,
+          "ledgerQuery": true,
+          "eventSource": true
+        }
+      }
+    }
+  }
+}

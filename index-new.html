@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AyurTrace - Blockchain Herb Traceability</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Header */
+        .header { background: white; border-bottom: 1px solid #e5e5e5; padding: 1rem 0; position: fixed; top: 0; width: 100%; z-index: 1000; }
+        .nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: 700; color: #4CAF50; }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { text-decoration: none; color: #333; font-weight: 500; }
+        
+        /* Hero */
+        .hero { background: linear-gradient(135deg, #f8fffe 0%, #e8f5f3 100%); padding: 120px 0 80px; }
+        .hero-content { text-align: center; }
+        .hero h1 { font-size: 3.5rem; font-weight: 800; color: #2c3e50; margin-bottom: 1rem; }
+        .hero p { font-size: 1.2rem; color: #7f8c8d; margin-bottom: 2rem; }
+        
+        /* Scanner Section */
+        .scanner-section { background: white; padding: 80px 0; }
+        .scanner-title { font-size: 3rem; font-weight: 800; color: #2c3e50; text-align: center; margin-bottom: 1rem; }
+        .scanner-subtitle { font-size: 1.2rem; color: #7f8c8d; text-align: center; margin-bottom: 3rem; }
+        .scanner-container { max-width: 600px; margin: 0 auto; }
+        .scanner-box { background: #f8f9fa; border: 2px solid #e9ecef; border-radius: 16px; padding: 3rem; text-align: center; }
+        .qr-frame { width: 320px; height: 320px; border: 3px dashed #4CAF50; border-radius: 16px; margin: 0 auto 2rem; display: flex; flex-direction: column; align-items: center; justify-content: center; background: white; }
+        .qr-icon { font-size: 5rem; color: #4CAF50; margin-bottom: 1rem; }
+        .qr-text { font-size: 1.3rem; font-weight: 700; color: #2c3e50; margin-bottom: 0.5rem; }
+        .qr-subtext { font-size: 1rem; color: #7f8c8d; }
+        .scanner-buttons { display: flex; gap: 1rem; justify-content: center; margin-bottom: 2rem; }
+        .btn-primary { background: #4CAF50; color: white; border: none; padding: 1rem 2rem; border-radius: 12px; font-size: 1rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; transition: all 0.2s; }
+        .btn-primary:hover { background: #45a049; transform: translateY(-2px); }
+        .btn-secondary { background: white; color: #4CAF50; border: 2px solid #4CAF50; padding: 1rem 2rem; border-radius: 12px; font-size: 1rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; transition: all 0.2s; }
+        .btn-secondary:hover { background: #f0f8f0; }
+        .scanner-info { border-top: 1px solid #e9ecef; padding-top: 1.5rem; font-size: 0.9rem; color: #6c757d; }
+        
+        /* Recent Verifications */
+        .verifications { background: white; border: 1px solid #e9ecef; border-radius: 16px; padding: 2rem; margin-top: 2rem; }
+        .verifications h3 { font-size: 1.5rem; font-weight: 700; color: #2c3e50; text-align: center; margin-bottom: 1.5rem; }
+        .verification-item { display: flex; align-items: center; gap: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 12px; margin-bottom: 1rem; border-left: 4px solid #4CAF50; }
+        .verification-icon { font-size: 2rem; }
+        .verification-content { flex: 1; }
+        .verification-name { font-weight: 700; color: #2c3e50; margin-bottom: 0.3rem; }
+        .verification-details { font-size: 0.9rem; color: #6c757d; }
+        .verification-status { color: #4CAF50; font-weight: 700; background: rgba(76, 175, 80, 0.1); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.8rem; }
+        
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">🌿 AyurTrace</div>
+                <div class="nav-links">
+                    <a href="#home">Home</a>
+                    <a href="#verify">Verify</a>
+                    <a href="reports.html">Reports</a>
+                    <a href="login.html">Login</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Blockchain Herb Verification</h1>
+                <p>Verify the authenticity of your Ayurvedic herbs with blockchain technology</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="scanner-section" id="verify">
+        <div class="container">
+            <h2 class="scanner-title">Verify Your Product</h2>
+            <p class="scanner-subtitle">Scan QR code or upload image to trace your Ayurvedic herbs</p>
+            
+            <div class="scanner-container">
+                <div class="scanner-box">
+                    <div class="qr-frame">
+                        <video id="qr-video" autoplay style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px; display: none;"></video>
+                        <div id="qr-result" class="hidden" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(76, 175, 80, 0.95); color: white; display: flex; align-items: center; justify-content: center; border-radius: 12px; font-weight: 700; font-size: 1.2rem;"></div>
+                        <div id="scanner-placeholder">
+                            <div class="qr-icon">📱</div>
+                            <div class="qr-text">Scan QR Code</div>
+                            <div class="qr-subtext">Position QR code within the frame</div>
+                        </div>
+                    </div>
+                    
+                    <div class="scanner-buttons">
+                        <button id="start-scan" class="btn-primary">
+                            <span>📱</span> Start Camera
+                        </button>
+                        <input type="file" id="qr-file" accept="image/*" class="hidden">
+                        <button id="upload-qr" class="btn-secondary" onclick="document.getElementById('qr-file').click()">
+                            <span>📁</span> Upload Image
+                        </button>
+                    </div>
+                    
+                    <div class="scanner-info">
+                        <div>Supported: QR Code • Data Matrix • Barcode</div>
+                        <div style="margin-top: 0.5rem;">🔒 Secure & Private</div>
+                    </div>
+                </div>
+                
+                <div class="verifications">
+                    <h3>Recent Verifications</h3>
+                    
+                    <div class="verification-item">
+                        <div class="verification-icon">🌿</div>
+                        <div class="verification-content">
+                            <div class="verification-name">Ashwagandha Root</div>
+                            <div class="verification-details">ASH-2024-001 • 2 minutes ago</div>
+                        </div>
+                        <div class="verification-status">✓ Verified</div>
+                    </div>
+                    
+                    <div class="verification-item">
+                        <div class="verification-icon">🌾</div>
+                        <div class="verification-content">
+                            <div class="verification-name">Turmeric Powder</div>
+                            <div class="verification-details">TUR-2024-002 • 5 minutes ago</div>
+                        </div>
+                        <div class="verification-status">✓ Verified</div>
+                    </div>
+                    
+                    <div class="verification-item" style="border-left-color: #ffc107;">
+                        <div class="verification-icon">🌱</div>
+                        <div class="verification-content">
+                            <div class="verification-name">Brahmi Extract</div>
+                            <div class="verification-details">BRA-2024-003 • 8 minutes ago</div>
+                        </div>
+                        <div class="verification-status" style="color: #ffc107; background: rgba(255, 193, 7, 0.1);">⏳ Processing</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="qr-scanner.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
