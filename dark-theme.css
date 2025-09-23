@@ -1,0 +1,54 @@
+/* Dark Theme Styles */
+body.dark-theme {
+    background: #1a1a1a !important;
+    color: #fff !important;
+}
+
+body.dark-theme section {
+    background: #1a1a1a !important;
+    color: #fff !important;
+}
+
+body.dark-theme .card,
+body.dark-theme div[style*="background:white"],
+body.dark-theme div[style*="background:#fff"] {
+    background: #2d2d2d !important;
+    color: #fff !important;
+}
+
+body.dark-theme .navbar {
+    background: rgba(0, 0, 0, 0.9) !important;
+}
+
+body.dark-theme .nav-menu a {
+    color: #fff !important;
+}
+
+body.dark-theme h1,
+body.dark-theme h2,
+body.dark-theme h3,
+body.dark-theme p {
+    color: #fff !important;
+}
+
+body.dark-theme input,
+body.dark-theme select,
+body.dark-theme textarea {
+    background: #444 !important;
+    color: #fff !important;
+    border: 2px solid #666 !important;
+}
+
+body.dark-theme .verification-item {
+    background: #333 !important;
+}
+
+body.dark-theme .cert {
+    background: #333 !important;
+    border-color: #4CAF50 !important;
+}
+
+/* Smooth transitions */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease !important;
+}

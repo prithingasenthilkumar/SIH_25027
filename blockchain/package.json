@@ -1,0 +1,38 @@
+{
+  "name": "ayurtrace-blockchain",
+  "version": "1.0.0",
+  "description": "Blockchain-based Ayurvedic herbal traceability system",
+  "main": "api/server.js",
+  "scripts": {
+    "start": "node api/server.js",
+    "dev": "nodemon api/server.js",
+    "network-up": "docker-compose -f config/docker-compose.yml up -d",
+    "network-down": "docker-compose -f config/docker-compose.yml down",
+    "deploy-chaincode": "node scripts/deploy-chaincode.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "fabric-network": "^2.2.19",
+    "fabric-ca-client": "^2.2.19",
+    "cors": "^2.8.5",
+    "multer": "^1.4.5",
+    "ipfs-http-client": "^60.0.1",
+    "crypto": "^1.0.1",
+    "fs-extra": "^11.1.1",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "jest": "^29.7.0"
+  },
+  "keywords": [
+    "blockchain",
+    "hyperledger-fabric",
+    "ayurveda",
+    "traceability",
+    "supply-chain"
+  ],
+  "author": "AyurTrace Team",
+  "license": "MIT"
+}
