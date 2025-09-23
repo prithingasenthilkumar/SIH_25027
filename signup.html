@@ -80,15 +80,8 @@
                 return;
             }
             
-            // Create new user
-            fetch('http://localhost:3000/api/signup', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ username, email, password, role })
-            })
-            .then(response => response.json())
+            // Create new user using DatabaseAPI
+            DatabaseAPI.signup({ username, email, password, role })
             .then(data => {
                 if (data.success) {
                     alert('Account created successfully! Please login.');
@@ -103,5 +96,6 @@
             });
         });
     </script>
+    <script src="db-config.js"></script>
 </body>
 </html>

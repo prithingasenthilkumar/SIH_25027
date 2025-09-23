@@ -320,7 +320,8 @@ document.addEventListener('DOMContentLoaded', () => {
 function logout() {
     localStorage.removeItem('userRole');
     localStorage.removeItem('username');
-    window.location.href = 'index.html';
+    localStorage.removeItem('isLoggedIn');
+    window.location.href = 'login.html';
 }
 
 function shareProduct(productId) {

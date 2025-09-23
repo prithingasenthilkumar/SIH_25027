@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <script src="auth.js"></script>
+    <script>
+        // Protect dashboard page
+        protectDashboard();
+    </script>
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">🌿 AyurTrace</div>
@@ -405,11 +410,7 @@
             alert(`Alert ${alertId} acknowledged`);
         }
 
-        function logout() {
-            localStorage.removeItem('userRole');
-            localStorage.removeItem('username');
-            window.location.href = 'index.html';
-        }
+        // Logout function is now in auth.js
     </script>
 
     <style>
@@ -599,5 +600,6 @@
             border-left: 4px solid #4CAF50;
         }
     </style>
+    <script src="db-config.js"></script>
 </body>
 </html>

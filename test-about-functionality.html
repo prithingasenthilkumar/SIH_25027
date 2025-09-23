@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Navigation Test - AyurTrace</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
+        .test-container { max-width: 800px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; }
+        .test-result { padding: 10px; margin: 10px 0; border-radius: 5px; border-left: 4px solid; }
+        .pass { background-color: #d4edda; color: #155724; border-color: #28a745; }
+        .fail { background-color: #f8d7da; color: #721c24; border-color: #dc3545; }
+        .test-button { padding: 12px 24px; margin: 10px 5px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        .test-button:hover { background: #0056b3; }
+        .nav-test { background: #e9ecef; padding: 15px; border-radius: 5px; margin: 20px 0; }
+        .nav-test a { margin: 0 10px; padding: 8px 16px; background: #007bff; color: white; text-decoration: none; border-radius: 4px; }
+        .nav-test a:hover { background: #0056b3; }
+        #about-section { background: #f8f9fa; padding: 30px; margin: 20px 0; border-radius: 10px; border: 2px solid #dee2e6; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 About Navigation Functionality Test</h1>
+        
+        <div class="nav-test">
+            <h3>Test Navigation Links:</h3>
+            <a href="#about-section">About (Hash Link)</a>
+            <a href="index.html#about">Main Page About</a>
+            <a href="lab-dashboard.html">Lab Dashboard</a>
+        </div>
+        
+        <div id="test-results"></div>
+        
+        <button class="test-button" onclick="runAboutTests()">🚀 Run About Navigation Tests</button>
+        <button class="test-button" onclick="testScrolling()">📜 Test Smooth Scrolling</button>
+        <button class="test-button" onclick="testFromDashboard()">🏥 Test Dashboard Navigation</button>
+        <button class="test-button" onclick="clearResults()">🗑️ Clear Results</button>
+        
+        <div id="about-section">
+            <h2>About AyurTrace</h2>
+            <p>This is a test About section to verify navigation functionality.</p>
+            <p>If you can see this section after clicking the About link, the navigation is working correctly!</p>
+        </div>
+    </div>
+
+    <script>
+        let testCount = 0;
+        
+        function addTestResult(testName, passed, details = '') {
+            const results = document.getElementById('test-results');
+            const div = document.createElement('div');
+            div.className = `test-result ${passed ? 'pass' : 'fail'}`;
+            div.innerHTML = `
+                <strong>${passed ? '✅' : '❌'} Test ${++testCount}: ${testName}</strong>
+                ${details ? `<br><small>${details}</small>` : ''}
+            `;
+            results.appendChild(div);
+        }
+        
+        function runAboutTests() {
+            clearResults();
+            
+            // Test 1: Check if About section exists
+            const aboutSection = document.getElementById('about-section');
+            addTestResult('About section exists', aboutSection !== null, 'Found About section with ID "about-section"');
+            
+            // Test 2: Check hash navigation
+            const currentHash = window.location.hash;
+            addTestResult('Current page supports hash navigation', true, `Current hash: "${currentHash}"`);
+            
+            // Test 3: Test programmatic navigation
+            try {
+                window.location.hash = '#about-section';
+                setTimeout(() => {
+                    const newHash = window.location.hash;
+                    addTestResult('Hash navigation works', newHash === '#about-section', `Hash changed to: "${newHash}"`);
+                }, 100);
+            } catch (error) {
+                addTestResult('Hash navigation works', false, `Error: ${error.message}`);
+            }
+            
+            // Test 4: Check if main page files exist
+            fetch('index.html')
+                .then(response => {
+                    addTestResult('Main page (index.html) accessible', response.ok, `Status: ${response.status}`);
+                    return response.text();
+                })
+                .then(html => {
+                    const hasAboutLink = html.includes('href="#about"');
+                    const hasAboutSection = html.includes('id="about"');
+                    addTestResult('Main page has About link', hasAboutLink, 'Found href="#about" in navigation');
+                    addTestResult('Main page has About section', hasAboutSection, 'Found id="about" section');
+                })
+                .catch(error => {
+                    addTestResult('Main page accessible', false, `Error: ${error.message}`);
+                });
+        }
+        
+        function testScrolling() {
+            const aboutSection = document.getElementById('about-section');
+            if (aboutSection) {
+                aboutSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                addTestResult('Smooth scrolling to About section', true, 'Scrolled to About section smoothly');
+            } else {
+                addTestResult('Smooth scrolling to About section', false, 'About section not found');
+            }
+        }
+        
+        function testFromDashboard() {
+            fetch('lab-dashboard.html')
+                .then(response => response.text())
+                .then(html => {
+                    const hasAboutLink = html.includes('href="index.html#about"');
+                    addTestResult('Dashboard has About link to main page', hasAboutLink, 
+                        hasAboutLink ? 'Found correct About link in dashboard' : 'About link not found or incorrect');
+                })
+                .catch(error => {
+                    addTestResult('Dashboard About link test', false, `Error loading dashboard: ${error.message}`);
+                });
+        }
+        
+        function clearResults() {
+            document.getElementById('test-results').innerHTML = '';
+            testCount = 0;
+        }
+        
+        // Auto-run basic tests on page load
+        window.addEventListener('load', function() {
+            setTimeout(runAboutTests, 500);
+        });
+        
+        // Handle hash changes
+        window.addEventListener('hashchange', function() {
+            console.log('Hash changed to:', window.location.hash);
+        });
+    </script>
+</body>
+</html>

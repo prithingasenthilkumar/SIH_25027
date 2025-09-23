@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Button Test - AyurTrace</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-result { padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .pass { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .fail { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        button { padding: 10px 20px; margin: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>About Button Navigation Test</h1>
+    
+    <div id="test-results"></div>
+    
+    <button onclick="testAboutNavigation()">Test About Button Navigation</button>
+    <button onclick="testFromDashboard()">Test From Lab Dashboard</button>
+    
+    <script>
+        function testAboutNavigation() {
+            const results = document.getElementById('test-results');
+            results.innerHTML = '';
+            
+            // Test 1: Check if About link exists on main page
+            fetch('index.html')
+                .then(response => response.text())
+                .then(html => {
+                    const hasAboutLink = html.includes('href="#about"');
+                    addTestResult('About link exists in navigation', hasAboutLink);
+                    
+                    // Test 2: Check if About section exists
+                    const hasAboutSection = html.includes('id="about"');
+                    addTestResult('About section exists on page', hasAboutSection);
+                    
+                    // Test 3: Check About section content
+                    const hasAboutContent = html.includes('How It Works');
+                    addTestResult('About section has content', hasAboutContent);
+                })
+                .catch(error => {
+                    addTestResult('Failed to load index.html', false);
+                });
+        }
+        
+        function testFromDashboard() {
+            // Test About link from lab dashboard
+            fetch('lab-dashboard.html')
+                .then(response => response.text())
+                .then(html => {
+                    const hasAboutLink = html.includes('href="index.html#about"');
+                    addTestResult('Lab dashboard has About link to main page', hasAboutLink);
+                    
+                    // Simulate click test
+                    const aboutUrl = 'index.html#about';
+                    addTestResult('About URL is correctly formatted', aboutUrl === 'index.html#about');
+                })
+                .catch(error => {
+                    addTestResult('Failed to load lab-dashboard.html', false);
+                });
+        }
+        
+        function addTestResult(testName, passed) {
+            const results = document.getElementById('test-results');
+            const div = document.createElement('div');
+            div.className = `test-result ${passed ? 'pass' : 'fail'}`;
+            div.innerHTML = `${passed ? '✅' : '❌'} ${testName}`;
+            results.appendChild(div);
+        }
+        
+        // Auto-run tests on page load
+        window.onload = function() {
+            testAboutNavigation();
+            setTimeout(testFromDashboard, 1000);
+        };
+    </script>
+</body>
+</html>

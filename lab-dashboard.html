@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <script src="auth.js"></script>
+    <script>
+        // Protect dashboard page
+        protectDashboard();
+    </script>
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">🌿 AyurTrace</div>
@@ -286,11 +291,7 @@
             console.log('Refreshing recent results...');
         }
 
-        function logout() {
-            localStorage.removeItem('userRole');
-            localStorage.removeItem('username');
-            window.location.href = 'index.html';
-        }
+        // Logout function is now in auth.js
     </script>
 
     <style>

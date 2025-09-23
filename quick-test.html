@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quick Auth Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        button { padding: 10px 20px; margin: 10px; font-size: 16px; }
+        .success { color: green; }
+        .error { color: red; }
+        .info { color: blue; }
+    </style>
+</head>
+<body>
+    <h1>🚀 Quick Authentication Test</h1>
+    
+    <div>
+        <button onclick="testLogin()">1. Test Login</button>
+        <button onclick="testNavigation()">2. Test Navigation</button>
+        <button onclick="testDashboard()">3. Test Dashboard Access</button>
+        <button onclick="testLogout()">4. Test Logout</button>
+        <button onclick="clearAll()">Clear All Data</button>
+    </div>
+    
+    <div id="results"></div>
+    
+    <script src="auth.js"></script>
+    <script>
+        function log(message, type = 'info') {
+            const results = document.getElementById('results');
+            results.innerHTML += `<div class="${type}">${message}</div>`;
+            console.log(message);
+        }
+        
+        function testLogin() {
+            log('🔐 Testing Login...', 'info');
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('userRole', 'processor');
+            localStorage.setItem('username', 'testuser');
+            log('✅ Login data set successfully', 'success');
+            log(`isLoggedIn: ${localStorage.getItem('isLoggedIn')}`, 'info');
+            log(`userRole: ${localStorage.getItem('userRole')}`, 'info');
+        }
+        
+        function testNavigation() {
+            log('🧭 Testing Navigation...', 'info');
+            window.location.href = 'index.html';
+        }
+        
+        function testDashboard() {
+            log('📊 Testing Dashboard Access...', 'info');
+            window.location.href = 'processor-dashboard.html';
+        }
+        
+        function testLogout() {
+            log('🚪 Testing Logout...', 'info');
+            if (typeof logout === 'function') {
+                logout();
+            } else {
+                log('❌ Logout function not found', 'error');
+            }
+        }
+        
+        function clearAll() {
+            localStorage.clear();
+            document.getElementById('results').innerHTML = '';
+            log('🧹 All data cleared', 'info');
+        }
+    </script>
+</body>
+</html>

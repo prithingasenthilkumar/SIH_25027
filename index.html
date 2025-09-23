@@ -14,7 +14,9 @@
             <div class="nav-menu">
                 <a href="#home">Home</a>
                 <a href="#about">About</a>
-                <a href="login.html">Login</a>
+                <a href="#" id="dashboardLink" class="hidden">Dashboard</a>
+                <a href="login.html" id="loginLink">Login</a>
+                <a href="#" id="logoutLink" class="hidden" onclick="logout()">Logout</a>
             </div>
         </div>
     </nav>
@@ -100,108 +102,52 @@
         </div>
     </footer>
 
-    <!-- Step Modal -->
-    <div id="stepModal" class="modal hidden">
-        <div class="modal-content">
-            <span class="close" onclick="closeStepModal()">&times;</span>
-            <div id="modalContent"></div>
-        </div>
-    </div>
-
+    <script src="auth.js"></script>
     <script src="db-config.js"></script>
     <script src="qr-scanner.js"></script>
     <script src="app.js"></script>
     <script src="about-navigation-test.js"></script>
     <script>
-        function openStepModal(step) {
-            const modal = document.getElementById('stepModal');
-            const content = document.getElementById('modalContent');
+        // Check login status and update navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            const userRole = localStorage.getItem('userRole');
             
-            const stepData = {
-                harvest: {
-                    title: '🌱 Harvest Stage',
-                    content: `
-                        <h2>Farm to Blockchain</h2>
-                        <p>The journey begins at certified organic farms where herbs are carefully cultivated and harvested.</p>
-                        <ul>
-                            <li><strong>Location Tracking:</strong> GPS coordinates recorded</li>
-                            <li><strong>Harvest Date:</strong> Exact timing for optimal potency</li>
-                            <li><strong>Weather Conditions:</strong> Environmental factors logged</li>
-                            <li><strong>Farmer Certification:</strong> Verified organic credentials</li>
-                        </ul>
-                        <button class="btn-primary" onclick="window.open('processor-dashboard.html', '_blank')">View Processor Dashboard</button>
-                    `
-                },
-                process: {
-                    title: '⚙️ Processing Stage',
-                    content: `
-                        <h2>Traditional Methods, Modern Tracking</h2>
-                        <p>Herbs undergo traditional Ayurvedic processing with complete digital documentation.</p>
-                        <ul>
-                            <li><strong>Processing Method:</strong> Sun-drying, grinding, extraction</li>
-                            <li><strong>Temperature Control:</strong> Optimal conditions maintained</li>
-                            <li><strong>Duration Tracking:</strong> Processing time recorded</li>
-                            <li><strong>Quality Checks:</strong> Multiple inspection points</li>
-                        </ul>
-                        <button class="btn-primary" onclick="window.open('processor-dashboard.html', '_blank')">View Processing Hub</button>
-                    `
-                },
-                test: {
-                    title: '🔬 Testing Stage',
-                    content: `
-                        <h2>Scientific Validation</h2>
-                        <p>Rigorous laboratory testing ensures purity, potency, and safety of every batch.</p>
-                        <ul>
-                            <li><strong>Purity Testing:</strong> Heavy metals, pesticides, contaminants</li>
-                            <li><strong>Potency Analysis:</strong> Active compound verification</li>
-                            <li><strong>DNA Authentication:</strong> Species confirmation</li>
-                            <li><strong>Microbial Testing:</strong> Safety assurance</li>
-                        </ul>
-                        <button class="btn-primary" onclick="window.open('lab-dashboard.html', '_blank')">View Lab Dashboard</button>
-                    `
-                },
-                verify: {
-                    title: '✅ Verification Stage',
-                    content: `
-                        <h2>Consumer Transparency</h2>
-                        <p>Complete traceability through QR codes gives consumers full visibility into their herbs' journey.</p>
-                        <ul>
-                            <li><strong>QR Code Scanning:</strong> Instant access to full history</li>
-                            <li><strong>Blockchain Verification:</strong> Immutable record validation</li>
-                            <li><strong>Certificate Access:</strong> Lab reports and certifications</li>
-                            <li><strong>Supply Chain Map:</strong> Visual journey tracking</li>
-                        </ul>
-                        <button class="btn-primary" onclick="document.getElementById('start-scan').click(); closeStepModal()">Start QR Scanning</button>
-                    `
+            console.log('Index page - isLoggedIn:', isLoggedIn, 'userRole:', userRole);
+            
+            if (isLoggedIn) {
+                console.log('User is logged in, updating navigation');
+                document.getElementById('loginLink').classList.add('hidden');
+                document.getElementById('logoutLink').classList.remove('hidden');
+                document.getElementById('dashboardLink').classList.remove('hidden');
+                
+                // Set dashboard link based on user role
+                const dashboardLink = document.getElementById('dashboardLink');
+                switch(userRole) {
+                    case 'processor':
+                        dashboardLink.href = 'processor-dashboard.html';
+                        console.log('Set dashboard link to processor-dashboard.html');
+                        break;
+                    case 'lab':
+                        dashboardLink.href = 'lab-dashboard.html';
+                        console.log('Set dashboard link to lab-dashboard.html');
+                        break;
+                    case 'manufacturer':
+                        dashboardLink.href = 'manufacturer-dashboard.html';
+                        console.log('Set dashboard link to manufacturer-dashboard.html');
+                        break;
+                    case 'regulator':
+                        dashboardLink.href = 'regulator-dashboard.html';
+                        console.log('Set dashboard link to regulator-dashboard.html');
+                        break;
+                    default:
+                        dashboardLink.href = 'login.html';
+                        console.log('Unknown role, dashboard link set to login.html');
                 }
-            };
-            
-            content.innerHTML = `
-                <div class="step-modal-header">
-                    <h1>${stepData[step].title}</h1>
-                </div>
-                <div class="step-modal-body">
-                    ${stepData[step].content}
-                </div>
-            `;
-            
-            modal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-        
-        function closeStepModal() {
-            const modal = document.getElementById('stepModal');
-            modal.classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
-        
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            const modal = document.getElementById('stepModal');
-            if (event.target === modal) {
-                closeStepModal();
+            } else {
+                console.log('User is not logged in, showing login link');
             }
-        }
+        });
     </script>
 </body>
 </html>
