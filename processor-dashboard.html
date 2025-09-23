@@ -180,23 +180,24 @@
         });
 
         // Handle batch form submission
-        document.getElementById('batchForm').addEventListener('submit', function(e) {
+        document.getElementById('batchForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const formData = new FormData(e.target);
             const batchData = Object.fromEntries(formData);
             
-            // Simulate blockchain transaction
-            console.log('Recording batch processing:', batchData);
-            
-            // In real implementation, this would interact with blockchain
-            alert('Processing step recorded successfully on blockchain!');
-            
-            // Reset form
-            e.target.reset();
-            
-            // Refresh active batches (in real app, this would fetch from blockchain)
-            refreshActiveBatches();
+            try {
+                const result = await DatabaseAPI.createBatch(batchData);
+                if (result.success) {
+                    alert('Batch recorded successfully in database!');
+                    e.target.reset();
+                    refreshActiveBatches();
+                } else {
+                    alert('Failed to record batch');
+                }
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
         });
 
         function updateBatch(batchId) {
@@ -316,5 +317,6 @@
             color: #666;
         }
     </style>
+    <script src="db-config.js"></script>
 </body>
 </html>

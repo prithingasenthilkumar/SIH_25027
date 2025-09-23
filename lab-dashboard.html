@@ -206,23 +206,24 @@
         });
 
         // Handle test result form submission
-        document.getElementById('testResultForm').addEventListener('submit', function(e) {
+        document.getElementById('testResultForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const formData = new FormData(e.target);
             const testData = Object.fromEntries(formData);
             
-            // Simulate blockchain transaction
-            console.log('Uploading test results:', testData);
-            
-            // In real implementation, this would interact with blockchain
-            alert('Test results uploaded successfully to blockchain!');
-            
-            // Reset form
-            e.target.reset();
-            
-            // Refresh pending tests
-            refreshPendingTests();
+            try {
+                const result = await DatabaseAPI.createLabTest(testData);
+                if (result.success) {
+                    alert('Test results uploaded successfully to database!');
+                    e.target.reset();
+                    refreshPendingTests();
+                } else {
+                    alert('Failed to upload test results');
+                }
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
         });
 
         function startTest(batchId, testType) {

@@ -40,36 +40,41 @@
         </form>
     </div>
 
+    <script src="db-config.js"></script>
     <script>
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const role = document.getElementById('role').value;
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             
-            // Simple authentication simulation
-            if (username && password && role) {
-                localStorage.setItem('userRole', role);
-                localStorage.setItem('username', username);
+            try {
+                const result = await DatabaseAPI.login({ username, password, role });
                 
-                // Redirect to appropriate dashboard
-                switch(role) {
-                    case 'processor':
-                        window.location.href = 'processor-dashboard.html';
-                        break;
-                    case 'lab':
-                        window.location.href = 'lab-dashboard.html';
-                        break;
-                    case 'manufacturer':
-                        window.location.href = 'manufacturer-dashboard.html';
-                        break;
-                    case 'regulator':
-                        window.location.href = 'regulator-dashboard.html';
-                        break;
+                if (result.success) {
+                    localStorage.setItem('userRole', role);
+                    localStorage.setItem('username', username);
+                    
+                    switch(role) {
+                        case 'processor':
+                            window.location.href = 'processor-dashboard.html';
+                            break;
+                        case 'lab':
+                            window.location.href = 'lab-dashboard.html';
+                            break;
+                        case 'manufacturer':
+                            window.location.href = 'manufacturer-dashboard.html';
+                            break;
+                        case 'regulator':
+                            window.location.href = 'regulator-dashboard.html';
+                            break;
+                    }
+                } else {
+                    alert('Invalid credentials');
                 }
-            } else {
-                alert('Please fill in all fields');
+            } catch (error) {
+                alert('Login failed');
             }
         });
     </script>
