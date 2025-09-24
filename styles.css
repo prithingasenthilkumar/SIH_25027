@@ -474,6 +474,17 @@ body {
     transform: translateY(-50%) scale(1.2);
 }
 
+/* Hide arrow in the 4th step (Verify) completely */
+.step-link:nth-child(4) .step-arrow {
+    display: none !important;
+}
+
+.step-link:nth-child(4):hover .step-arrow {
+    display: none !important;
+}
+
+
+
 .step-link {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }

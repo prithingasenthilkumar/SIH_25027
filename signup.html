@@ -5,15 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up - AyurTrace</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="animations.css">
 </head>
-<body>
-    <div class="login-container">
-        <form class="login-form" id="signupForm">
-            <h2>🌿 AyurTrace Sign Up</h2>
+<body class="page-transition">
+    <div class="login-container" style="background: linear-gradient(135deg, #000000 0%, #1a0000 100%);">
+        <form class="login-form bounce-in" id="signupForm" style="background: #1a1a1a; border: 2px solid #ff0000; box-shadow: 0 20px 40px rgba(255,0,0,0.3);">
+            <h2 style="color: #ff0000; text-shadow: 0 0 10px rgba(255,0,0,0.5);">🌿 AyurTrace Sign Up</h2>
             
             <div class="form-group">
-                <label for="role">Select Role</label>
-                <select id="role" name="role" required>
+                <label for="role" style="color: #ff0000;">Select Role</label>
+                <select id="role" name="role" required style="background: #000000; color: #ffffff; border: 2px solid #ff0000;">
                     <option value="">Choose your role</option>
                     <option value="processor">Processor</option>
                     <option value="lab">Laboratory</option>
@@ -23,33 +24,33 @@
             </div>
 
             <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" required>
+                <label for="username" style="color: #ff0000;">Username</label>
+                <input type="text" id="username" name="username" required style="background: #000000; color: #ffffff; border: 2px solid #ff0000;" placeholder="Enter your username">
             </div>
 
             <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
+                <label for="email" style="color: #ff0000;">Email</label>
+                <input type="email" id="email" name="email" required style="background: #000000; color: #ffffff; border: 2px solid #ff0000;" placeholder="Enter your email">
             </div>
 
             <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
+                <label for="password" style="color: #ff0000;">Password</label>
+                <input type="password" id="password" name="password" required style="background: #000000; color: #ffffff; border: 2px solid #ff0000;" placeholder="Enter your password">
             </div>
 
             <div class="form-group">
-                <label for="confirmPassword">Confirm Password</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" required>
+                <label for="confirmPassword" style="color: #ff0000;">Confirm Password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required style="background: #000000; color: #ffffff; border: 2px solid #ff0000;" placeholder="Confirm your password">
             </div>
 
-            <button type="submit" class="btn-primary" style="width: 100%;">Sign Up</button>
+            <button type="submit" class="btn-primary morph-btn ripple-effect" style="width: 100%; background: linear-gradient(135deg, #ff0000, #cc0000); border: none;">Sign Up</button>
             
             <div style="text-align: center; margin-top: 1rem;">
-                <a href="login.html" style="color: #4CAF50; text-decoration: none;">Already have an account? Login</a>
+                <a href="login.html" style="color: #ff0000; text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.color='#ff4444'" onmouseout="this.style.color='#ff0000'">Already have an account? Login</a>
             </div>
             
             <div style="text-align: center; margin-top: 0.5rem;">
-                <a href="index.html" style="color: #4CAF50; text-decoration: none;">← Back to Home</a>
+                <a href="index.html" style="color: #ff0000; text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.color='#ff4444'" onmouseout="this.style.color='#ff0000'">← Back to Home</a>
             </div>
         </form>
     </div>
@@ -97,5 +98,22 @@
         });
     </script>
     <script src="db-config.js"></script>
+    <script src="page-transitions.js"></script>
+    <script>
+        // Add focus effects to inputs
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('input, select');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.style.boxShadow = '0 0 15px rgba(255,0,0,0.5)';
+                    this.style.borderColor = '#ff4444';
+                });
+                input.addEventListener('blur', function() {
+                    this.style.boxShadow = 'none';
+                    this.style.borderColor = '#ff0000';
+                });
+            });
+        });
+    </script>
 </body>
 </html>

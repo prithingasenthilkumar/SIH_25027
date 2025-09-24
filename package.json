@@ -2,10 +2,10 @@
   "name": "ayurtrace",
   "version": "1.0.0",
   "description": "AyurTrace - Ayurvedic Herb Traceability System",
-  "main": "server-standalone.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node server-standalone.js",
-    "dev": "nodemon server-standalone.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
