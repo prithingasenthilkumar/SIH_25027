@@ -475,12 +475,20 @@ body {
 }
 
 /* Hide arrow in the 4th step (Verify) completely */
-.step-link:nth-child(4) .step-arrow {
+.step-link:nth-child(4) .step-arrow,
+.process-steps .step-link:nth-child(4) .step-arrow,
+.process-steps a:nth-child(4) .step-arrow {
     display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
 }
 
-.step-link:nth-child(4):hover .step-arrow {
+.step-link:nth-child(4):hover .step-arrow,
+.process-steps .step-link:nth-child(4):hover .step-arrow,
+.process-steps a:nth-child(4):hover .step-arrow {
     display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
 }
 
 
