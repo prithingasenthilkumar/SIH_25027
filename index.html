@@ -12,7 +12,7 @@
         <div class="nav-container">
             <div class="nav-logo">🌿 AyurTrace</div>
             <div class="nav-menu">
-                <a href="#home">Home</a>
+                <a href="index.html">Home</a>
                 <a href="#about">About</a>
                 <a href="#" id="dashboardLink" class="hidden">Dashboard</a>
                 <a href="login.html" id="loginLink">Login</a>
@@ -106,46 +106,49 @@
     <script src="db-config.js"></script>
     <script src="qr-scanner.js"></script>
     <script src="app.js"></script>
-    <script src="about-navigation-test.js"></script>
     <script>
-        // Check login status and update navigation
         document.addEventListener('DOMContentLoaded', function() {
+            // Always force page to load at top (Home section)
+            window.scrollTo(0, 0);
+            // Clear any hash from URL to prevent auto-scrolling
+            if (window.location.hash) {
+                history.replaceState(null, null, window.location.pathname);
+            }
+            
             const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
             const userRole = localStorage.getItem('userRole');
             
-            console.log('Index page - isLoggedIn:', isLoggedIn, 'userRole:', userRole);
+            // Remove any duplicate dashboard links
+            const allDashboardLinks = document.querySelectorAll('a[href*="dashboard"], a[id*="dashboard"]');
+            allDashboardLinks.forEach((link, index) => {
+                if (index > 0 || link.id !== 'dashboardLink') {
+                    link.remove();
+                }
+            });
             
-            if (isLoggedIn) {
-                console.log('User is logged in, updating navigation');
+            const dashboardLink = document.getElementById('dashboardLink');
+            
+            if (isLoggedIn && dashboardLink) {
                 document.getElementById('loginLink').classList.add('hidden');
                 document.getElementById('logoutLink').classList.remove('hidden');
-                document.getElementById('dashboardLink').classList.remove('hidden');
+                dashboardLink.classList.remove('hidden');
                 
-                // Set dashboard link based on user role
-                const dashboardLink = document.getElementById('dashboardLink');
                 switch(userRole) {
                     case 'processor':
                         dashboardLink.href = 'processor-dashboard.html';
-                        console.log('Set dashboard link to processor-dashboard.html');
                         break;
                     case 'lab':
                         dashboardLink.href = 'lab-dashboard.html';
-                        console.log('Set dashboard link to lab-dashboard.html');
                         break;
                     case 'manufacturer':
                         dashboardLink.href = 'manufacturer-dashboard.html';
-                        console.log('Set dashboard link to manufacturer-dashboard.html');
                         break;
                     case 'regulator':
                         dashboardLink.href = 'regulator-dashboard.html';
-                        console.log('Set dashboard link to regulator-dashboard.html');
                         break;
                     default:
                         dashboardLink.href = 'login.html';
-                        console.log('Unknown role, dashboard link set to login.html');
                 }
-            } else {
-                console.log('User is not logged in, showing login link');
             }
         });
     </script>

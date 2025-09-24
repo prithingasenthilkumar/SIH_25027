@@ -526,6 +526,27 @@ body {
     display: none !important;
 }
 
+/* Ensure only one dashboard link */
+.nav-menu a[href*="dashboard"]:not(#dashboardLink),
+.nav-menu a:not(#dashboardLink)[id*="dashboard"] {
+    display: none !important;
+}
+
+/* Prevent duplicate navigation items */
+.nav-menu a:nth-of-type(n+6) {
+    display: none !important;
+}
+
+/* Prevent auto-scrolling behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Ensure page loads at top */
+body {
+    scroll-behavior: auto;
+}
+
 .loading {
     opacity: 0.6;
     pointer-events: none;

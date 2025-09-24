@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug - AyurTrace</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .debug-box { background: #f0f0f0; padding: 15px; margin: 10px 0; border-radius: 5px; }
+        button { padding: 10px 15px; margin: 5px; cursor: pointer; }
+        .success { color: green; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>🔧 AyurTrace Debug Tool</h1>
+    
+    <div class="debug-box">
+        <h3>Authentication Status</h3>
+        <div id="authStatus"></div>
+        <button onclick="checkAuth()">Check Auth</button>
+        <button onclick="clearAuth()">Clear Auth</button>
+    </div>
+
+    <div class="debug-box">
+        <h3>Quick Login</h3>
+        <select id="role">
+            <option value="processor">Processor</option>
+            <option value="lab">Lab</option>
+            <option value="manufacturer">Manufacturer</option>
+            <option value="regulator">Regulator</option>
+        </select>
+        <button onclick="quickLogin()">Login</button>
+    </div>
+
+    <div class="debug-box">
+        <h3>Navigation</h3>
+        <button onclick="goTo('index.html')">Home</button>
+        <button onclick="goTo('login.html')">Login</button>
+        <button onclick="goTo('processor-dashboard.html')">Processor Dashboard</button>
+        <button onclick="goTo('lab-dashboard.html')">Lab Dashboard</button>
+    </div>
+
+    <script src="auth.js"></script>
+    <script>
+        function checkAuth() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            const userRole = localStorage.getItem('userRole');
+            const username = localStorage.getItem('username');
+            
+            document.getElementById('authStatus').innerHTML = `
+                <div>Login Status: ${isLoggedIn || 'null'}</div>
+                <div>User Role: ${userRole || 'null'}</div>
+                <div>Username: ${username || 'null'}</div>
+            `;
+        }
+
+        function clearAuth() {
+            localStorage.clear();
+            checkAuth();
+        }
+
+        function quickLogin() {
+            const role = document.getElementById('role').value;
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('userRole', role);
+            localStorage.setItem('username', 'testuser');
+            checkAuth();
+        }
+
+        function goTo(page) {
+            window.location.href = page;
+        }
+
+        // Initialize
+        checkAuth();
+    </script>
+</body>
+</html>
