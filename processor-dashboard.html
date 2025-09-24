@@ -193,16 +193,32 @@
             const batchData = Object.fromEntries(formData);
             
             try {
-                const result = await DatabaseAPI.createBatch(batchData);
+                const response = await fetch('/api/blockchain/record', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        type: 'batch_processing',
+                        ...batchData,
+                        timestamp: new Date().toISOString(),
+                        processor: localStorage.getItem('username')
+                    })
+                });
+                
+                const result = await response.json();
+                
                 if (result.success) {
-                    alert('Batch recorded successfully in database!');
+                    alert(`Processing step recorded on blockchain!\nTx Hash: ${result.txHash}`);
                     e.target.reset();
                     refreshActiveBatches();
                 } else {
-                    alert('Failed to record batch');
+                    throw new Error(result.error);
                 }
+                
             } catch (error) {
-                alert('Error: ' + error.message);
+                console.error('Blockchain error:', error);
+                alert('Failed to record on blockchain: ' + error.message);
             }
         });
 
