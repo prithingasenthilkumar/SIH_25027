@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Processor Dashboard - AyurTrace</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="animations.css">
 </head>
-<body>
+<body class="page-transition">
     <script src="auth.js"></script>
     <script>
         // Protect dashboard page
@@ -25,7 +26,7 @@
 
     <main class="dashboard">
         <div class="container">
-            <div class="dashboard-header">
+            <div class="dashboard-header fade-in-up">
                 <h1>Processing Hub</h1>
                 <p>Welcome, <span id="username">Processor</span> | Role: Processing Unit</p>
             </div>
@@ -94,7 +95,7 @@
                             <textarea id="processNotes" name="processNotes" rows="3" placeholder="Additional processing details..."></textarea>
                         </div>
 
-                        <button type="submit" class="btn-primary">Record Processing Step</button>
+                        <button type="submit" class="btn-primary morph-btn ripple-effect">Record Processing Step</button>
                     </form>
                 </div>
 
@@ -109,8 +110,8 @@
                             <p>Ashwagandha - 50kg</p>
                             <p>Started: March 15, 2024</p>
                             <div class="batch-actions">
-                                <button class="btn-secondary" onclick="updateBatch('ASH-2024-001')">Update</button>
-                                <button class="btn-primary" onclick="generateQR('ASH-2024-001')">Generate QR</button>
+                                <button class="btn-secondary morph-btn" onclick="updateBatch('ASH-2024-001')">Update</button>
+                                <button class="btn-primary morph-btn" onclick="generateQR('ASH-2024-001')">Generate QR</button>
                             </div>
                         </div>
 
@@ -122,8 +123,8 @@
                             <p>Turmeric - 75kg</p>
                             <p>Completed: March 10, 2024</p>
                             <div class="batch-actions">
-                                <button class="btn-secondary" onclick="viewBatch('TUR-2024-002')">View Details</button>
-                                <button class="btn-primary" onclick="generateQR('TUR-2024-002')">Generate QR</button>
+                                <button class="btn-secondary morph-btn" onclick="viewBatch('TUR-2024-002')">View Details</button>
+                                <button class="btn-primary morph-btn" onclick="generateQR('TUR-2024-002')">Generate QR</button>
                             </div>
                         </div>
                     </div>
@@ -140,7 +141,7 @@
                         </select>
                     </div>
                     
-                    <button class="btn-primary" onclick="generateQRCode()">Generate QR Code</button>
+                    <button class="btn-primary morph-btn ripple-effect" onclick="generateQRCode()">Generate QR Code</button>
                     
                     <div id="qrCodeDisplay" class="hidden">
                         <h4>Generated QR Code:</h4>
@@ -149,8 +150,8 @@
                                 QR Code Preview
                             </div>
                         </div>
-                        <button class="btn-secondary" onclick="downloadQR()">Download QR Code</button>
-                        <button class="btn-secondary" onclick="printQR()">Print QR Code</button>
+                        <button class="btn-secondary morph-btn" onclick="downloadQR()">Download QR Code</button>
+                        <button class="btn-secondary morph-btn" onclick="printQR()">Print QR Code</button>
                     </div>
                 </div>
 
@@ -194,16 +195,32 @@
             const batchData = Object.fromEntries(formData);
             
             try {
-                const result = await DatabaseAPI.createBatch(batchData);
+                const response = await fetch('/api/blockchain/record', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        type: 'batch_processing',
+                        ...batchData,
+                        timestamp: new Date().toISOString(),
+                        processor: localStorage.getItem('username')
+                    })
+                });
+                
+                const result = await response.json();
+                
                 if (result.success) {
-                    alert('Batch recorded successfully in database!');
+                    alert(`Processing step recorded on blockchain!\nTx Hash: ${result.txHash}`);
                     e.target.reset();
                     refreshActiveBatches();
                 } else {
-                    alert('Failed to record batch');
+                    throw new Error(result.error);
                 }
+                
             } catch (error) {
-                alert('Error: ' + error.message);
+                console.error('Blockchain error:', error);
+                alert('Failed to record on blockchain: ' + error.message);
             }
         });
 
@@ -259,6 +276,14 @@
             border-radius: 8px;
             margin-bottom: 1rem;
             border-left: 4px solid #4CAF50;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .batch-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background: #e9ecef;
         }
 
         .batch-header {
@@ -307,6 +332,18 @@
             padding: 1rem;
             background: #f8f9fa;
             border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .stat-item:hover {
+            transform: scale(1.05);
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .stat-item:hover .stat-number {
+            color: white;
         }
 
         .stat-number {
@@ -321,5 +358,52 @@
         }
     </style>
     <script src="db-config.js"></script>
+    <script src="page-transitions.js"></script>
+    <script>
+        // Add progress bar animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate stat numbers
+            const statNumbers = document.querySelectorAll('.stat-number');
+            statNumbers.forEach(stat => {
+                const finalValue = stat.textContent;
+                stat.textContent = '0';
+                
+                setTimeout(() => {
+                    if (finalValue.includes('kg')) {
+                        animateNumber(stat, 0, parseInt(finalValue.replace(/[^0-9]/g, '')), finalValue.replace(/[0-9]/g, ''));
+                    } else if (finalValue.includes('%')) {
+                        animateNumber(stat, 0, parseFloat(finalValue.replace('%', '')), '%');
+                    } else {
+                        animateNumber(stat, 0, parseInt(finalValue), '');
+                    }
+                }, 500);
+            });
+        });
+        
+        function animateNumber(element, start, end, suffix) {
+            const duration = 2000;
+            const startTime = performance.now();
+            
+            function update(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const current = start + (end - start) * progress;
+                
+                if (suffix === '%') {
+                    element.textContent = current.toFixed(1) + suffix;
+                } else if (suffix.includes('kg')) {
+                    element.textContent = Math.floor(current).toLocaleString() + suffix;
+                } else {
+                    element.textContent = Math.floor(current) + suffix;
+                }
+                
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            }
+            
+            requestAnimationFrame(update);
+        }
+    </script>
 </body>
 </html>

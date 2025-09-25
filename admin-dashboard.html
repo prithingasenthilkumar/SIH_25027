@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - AyurTrace</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">🌿 AyurTrace</div>
+            <div class="nav-menu">
+                <a href="index.html">Home</a>
+                <a href="reports.html">Reports</a>
+                <a href="#" onclick="logout()">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="dashboard">
+        <div class="container">
+            <div class="dashboard-header">
+                <h1>Admin Dashboard</h1>
+                <p>Welcome, <span id="username">Administrator</span> | Role: System Administrator</p>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h3>📊 System Overview</h3>
+                    <div class="system-stats">
+                        <div class="stat-card">
+                            <div class="stat-icon">👥</div>
+                            <div class="stat-content">
+                                <div class="stat-number">247</div>
+                                <div class="stat-label">Total Users</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">📦</div>
+                            <div class="stat-content">
+                                <div class="stat-number">2,847</div>
+                                <div class="stat-label">Total Batches</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">🏭</div>
+                            <div class="stat-content">
+                                <div class="stat-number">23</div>
+                                <div class="stat-label">Active Facilities</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">🔗</div>
+                            <div class="stat-content">
+                                <div class="stat-number">15,847</div>
+                                <div class="stat-label">Blockchain Txns</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>👥 User Management</h3>
+                    <div class="user-controls">
+                        <button class="btn-primary" onclick="addUser()">Add New User</button>
+                        <input type="text" id="userSearch" placeholder="Search users..." onkeyup="filterUsers()">
+                    </div>
+                    
+                    <div id="usersList">
+                        <div class="user-item">
+                            <div class="user-info">
+                                <strong>Ramesh Kumar</strong>
+                                <span class="user-role farmer">Farmer</span>
+                            </div>
+                            <p>ramesh@greenvalley.com | Last active: 2 hours ago</p>
+                            <div class="user-actions">
+                                <button class="btn-secondary" onclick="editUser('user1')">Edit</button>
+                                <button class="btn-secondary" onclick="suspendUser('user1')">Suspend</button>
+                            </div>
+                        </div>
+
+                        <div class="user-item">
+                            <div class="user-info">
+                                <strong>Dr. Priya Sharma</strong>
+                                <span class="user-role lab">Lab Technician</span>
+                            </div>
+                            <p>priya@nari.gov.in | Last active: 1 hour ago</p>
+                            <div class="user-actions">
+                                <button class="btn-secondary" onclick="editUser('user2')">Edit</button>
+                                <button class="btn-secondary" onclick="suspendUser('user2')">Suspend</button>
+                            </div>
+                        </div>
+
+                        <div class="user-item">
+                            <div class="user-info">
+                                <strong>Himalaya Processing</strong>
+                                <span class="user-role manufacturer">Manufacturer</span>
+                            </div>
+                            <p>admin@himalaya.com | Last active: 30 minutes ago</p>
+                            <div class="user-actions">
+                                <button class="btn-secondary" onclick="editUser('user3')">Edit</button>
+                                <button class="btn-secondary" onclick="suspendUser('user3')">Suspend</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>🏭 Facility Management</h3>
+                    <div class="facility-controls">
+                        <button class="btn-primary" onclick="addFacility()">Add Facility</button>
+                        <select id="facilityFilter" onchange="filterFacilities()">
+                            <option value="">All Types</option>
+                            <option value="farm">Farms</option>
+                            <option value="processor">Processors</option>
+                            <option value="lab">Laboratories</option>
+                            <option value="manufacturer">Manufacturers</option>
+                        </select>
+                    </div>
+
+                    <div id="facilitiesList">
+                        <div class="facility-item">
+                            <div class="facility-header">
+                                <strong>Green Valley Organic Farm</strong>
+                                <span class="facility-status active">Active</span>
+                            </div>
+                            <p>Type: Farm | Location: Rajasthan | Certified: USDA Organic</p>
+                            <div class="facility-actions">
+                                <button class="btn-secondary" onclick="viewFacility('fac1')">View Details</button>
+                                <button class="btn-secondary" onclick="auditFacility('fac1')">Schedule Audit</button>
+                            </div>
+                        </div>
+
+                        <div class="facility-item">
+                            <div class="facility-header">
+                                <strong>AyurPure Processing Unit</strong>
+                                <span class="facility-status active">Active</span>
+                            </div>
+                            <p>Type: Processor | Location: Kerala | Certified: GMP</p>
+                            <div class="facility-actions">
+                                <button class="btn-secondary" onclick="viewFacility('fac2')">View Details</button>
+                                <button class="btn-secondary" onclick="auditFacility('fac2')">Schedule Audit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>🚨 System Alerts</h3>
+                    <div class="alerts-list">
+                        <div class="alert-item critical">
+                            <div class="alert-header">
+                                <span class="alert-type">🔴 Critical</span>
+                                <span class="alert-time">5 minutes ago</span>
+                            </div>
+                            <p><strong>System Security Alert</strong></p>
+                            <p>Multiple failed login attempts detected from IP: 192.168.1.100</p>
+                            <div class="alert-actions">
+                                <button class="btn-primary" onclick="blockIP('192.168.1.100')">Block IP</button>
+                                <button class="btn-secondary" onclick="investigateAlert('alert1')">Investigate</button>
+                            </div>
+                        </div>
+
+                        <div class="alert-item warning">
+                            <div class="alert-header">
+                                <span class="alert-type">🟡 Warning</span>
+                                <span class="alert-time">1 hour ago</span>
+                            </div>
+                            <p><strong>Storage Capacity</strong></p>
+                            <p>Blockchain storage is 85% full. Consider archiving old data.</p>
+                            <div class="alert-actions">
+                                <button class="btn-secondary" onclick="manageStorage()">Manage Storage</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>⚙️ System Configuration</h3>
+                    <div class="config-sections">
+                        <div class="config-item">
+                            <h4>Blockchain Settings</h4>
+                            <div class="config-controls">
+                                <label>Network: <select><option>Ethereum Mainnet</option><option>Polygon</option></select></label>
+                                <label>Gas Price: <input type="number" value="20" min="1"> Gwei</label>
+                                <button class="btn-secondary">Update</button>
+                            </div>
+                        </div>
+
+                        <div class="config-item">
+                            <h4>Security Settings</h4>
+                            <div class="config-controls">
+                                <label><input type="checkbox" checked> Enable 2FA for all users</label>
+                                <label><input type="checkbox" checked> Require password reset every 90 days</label>
+                                <label><input type="checkbox"> Enable IP whitelisting</label>
+                                <button class="btn-secondary">Save Settings</button>
+                            </div>
+                        </div>
+
+                        <div class="config-item">
+                            <h4>Notification Settings</h4>
+                            <div class="config-controls">
+                                <label><input type="checkbox" checked> Email alerts for critical issues</label>
+                                <label><input type="checkbox" checked> SMS alerts for system downtime</label>
+                                <label><input type="checkbox"> Push notifications for mobile app</label>
+                                <button class="btn-secondary">Update Notifications</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>📈 System Performance</h3>
+                    <div class="performance-metrics">
+                        <div class="metric-item">
+                            <h4>Server Health</h4>
+                            <div class="metric-bar">
+                                <div class="metric-fill" style="width: 92%"></div>
+                            </div>
+                            <span>92% - Excellent</span>
+                        </div>
+
+                        <div class="metric-item">
+                            <h4>Database Performance</h4>
+                            <div class="metric-bar">
+                                <div class="metric-fill" style="width: 88%"></div>
+                            </div>
+                            <span>88% - Good</span>
+                        </div>
+
+                        <div class="metric-item">
+                            <h4>Blockchain Sync</h4>
+                            <div class="metric-bar">
+                                <div class="metric-fill" style="width: 95%"></div>
+                            </div>
+                            <span>95% - Excellent</span>
+                        </div>
+
+                        <div class="metric-item">
+                            <h4>API Response Time</h4>
+                            <div class="metric-bar">
+                                <div class="metric-fill" style="width: 85%"></div>
+                            </div>
+                            <span>156ms - Good</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>🔧 System Maintenance</h3>
+                    <div class="maintenance-actions">
+                        <button class="btn-primary" onclick="backupSystem()">🔄 Backup System</button>
+                        <button class="btn-secondary" onclick="clearCache()">🗑️ Clear Cache</button>
+                        <button class="btn-secondary" onclick="updateSystem()">⬆️ System Update</button>
+                        <button class="btn-secondary" onclick="exportLogs()">📄 Export Logs</button>
+                    </div>
+
+                    <div class="maintenance-status">
+                        <h4>Last Maintenance Activities:</h4>
+                        <ul>
+                            <li>✅ System backup completed - 2 hours ago</li>
+                            <li>✅ Database optimization - Yesterday</li>
+                            <li>✅ Security patch applied - 3 days ago</li>
+                            <li>⏳ Scheduled maintenance - Tomorrow 2:00 AM</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const username = localStorage.getItem('username') || 'Administrator';
+            document.getElementById('username').textContent = username;
+        });
+
+        function addUser() {
+            alert('Opening user creation form...');
+        }
+
+        function filterUsers() {
+            const searchTerm = document.getElementById('userSearch').value.toLowerCase();
+            const userItems = document.querySelectorAll('.user-item');
+            
+            userItems.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                item.style.display = text.includes(searchTerm) ? 'block' : 'none';
+            });
+        }
+
+        function editUser(userId) {
+            alert(`Editing user: ${userId}`);
+        }
+
+        function suspendUser(userId) {
+            if (confirm(`Suspend user ${userId}?`)) {
+                alert(`User ${userId} suspended`);
+            }
+        }
+
+        function addFacility() {
+            alert('Opening facility registration form...');
+        }
+
+        function filterFacilities() {
+            const filter = document.getElementById('facilityFilter').value;
+            console.log('Filtering facilities by:', filter);
+        }
+
+        function viewFacility(facilityId) {
+            alert(`Viewing facility details: ${facilityId}`);
+        }
+
+        function auditFacility(facilityId) {
+            alert(`Scheduling audit for facility: ${facilityId}`);
+        }
+
+        function blockIP(ip) {
+            if (confirm(`Block IP address ${ip}?`)) {
+                alert(`IP ${ip} has been blocked`);
+            }
+        }
+
+        function investigateAlert(alertId) {
+            alert(`Opening investigation for alert: ${alertId}`);
+        }
+
+        function manageStorage() {
+            alert('Opening storage management panel...');
+        }
+
+        function backupSystem() {
+            alert('System backup initiated...');
+        }
+
+        function clearCache() {
+            if (confirm('Clear system cache? This may temporarily slow down the system.')) {
+                alert('Cache cleared successfully');
+            }
+        }
+
+        function updateSystem() {
+            if (confirm('Update system? This will require a restart.')) {
+                alert('System update initiated...');
+            }
+        }
+
+        function exportLogs() {
+            alert('Exporting system logs...');
+        }
+
+        function logout() {
+            localStorage.removeItem('userRole');
+            localStorage.removeItem('username');
+            window.location.href = 'index.html';
+        }
+    </script>
+
+    <style>
+        .system-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .user-controls, .facility-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            align-items: center;
+        }
+
+        .user-controls input, .facility-controls select {
+            flex: 1;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .user-item, .facility-item {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #4CAF50;
+        }
+
+        .user-info, .facility-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .user-role, .facility-status {
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .user-role.farmer {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+
+        .user-role.lab {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .user-role.manufacturer {
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+
+        .facility-status.active {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+
+        .user-actions, .facility-actions, .alert-actions {
+            margin-top: 1rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .alerts-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .alert-item {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .alert-item.critical {
+            border-left: 4px solid #dc3545;
+        }
+
+        .alert-item.warning {
+            border-left: 4px solid #ffc107;
+        }
+
+        .alert-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .config-sections {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .config-item {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .config-item h4 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .config-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .config-controls label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .config-controls input, .config-controls select {
+            padding: 0.25rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .performance-metrics {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .metric-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .metric-item h4 {
+            min-width: 150px;
+            margin: 0;
+        }
+
+        .metric-bar {
+            flex: 1;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+        }
+
+        .metric-fill {
+            height: 100%;
+            background: #4CAF50;
+            border-radius: 4px;
+        }
+
+        .maintenance-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .maintenance-status ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .maintenance-status li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .maintenance-status li:last-child {
+            border-bottom: none;
+        }
+    </style>
+</body>
+</html>

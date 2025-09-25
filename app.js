@@ -126,18 +126,40 @@ class AyurTrace {
         }
     }
 
-    handleQRResult(qrCode) {
+    async handleQRResult(qrCode) {
         const resultDiv = document.getElementById('qr-result');
         
-        if (resultDiv) {
-            resultDiv.innerHTML = `
-                <h3>QR Code Detected!</h3>
-                <p>Batch ID: <strong>${qrCode}</strong></p>
-                <button class="btn-primary" onclick="window.open('product-details.html?id=${qrCode}', '_blank')">
-                    View Product Details
-                </button>
-            `;
-            resultDiv.classList.remove('hidden');
+        // Verify with blockchain
+        try {
+            const response = await fetch(`/api/blockchain/verify/${qrCode}`);
+            const verification = await response.json();
+            
+            if (resultDiv) {
+                resultDiv.innerHTML = `
+                    <h3>QR Code Detected!</h3>
+                    <p>Batch ID: <strong>${qrCode}</strong></p>
+                    <p>Status: <strong style="color: ${verification.verified ? 'green' : 'red'}">
+                        ${verification.verified ? '✅ Verified on Blockchain' : '❌ Not Verified'}
+                    </strong></p>
+                    <button class="btn-primary" onclick="window.open('product-details.html?id=${qrCode}', '_blank')">
+                        View Product Details
+                    </button>
+                `;
+                resultDiv.classList.remove('hidden');
+            }
+        } catch (error) {
+            console.error('Verification error:', error);
+            if (resultDiv) {
+                resultDiv.innerHTML = `
+                    <h3>QR Code Detected!</h3>
+                    <p>Batch ID: <strong>${qrCode}</strong></p>
+                    <p>Status: <strong style="color: orange">⚠️ Verification Failed</strong></p>
+                    <button class="btn-primary" onclick="window.open('product-details.html?id=${qrCode}', '_blank')">
+                        View Product Details
+                    </button>
+                `;
+                resultDiv.classList.remove('hidden');
+            }
         }
         
         // Stop scanning
@@ -208,7 +230,7 @@ class AyurTrace {
         }
     }
 
-    // Blockchain simulation
+    // Real Blockchain Integration
     async recordToBlockchain(data) {
         if (!navigator.onLine) {
             this.storeOfflineData(data);
@@ -217,27 +239,22 @@ class AyurTrace {
         }
 
         try {
-            // Simulate blockchain transaction
-            const txHash = this.generateTxHash();
-            const blockNumber = Math.floor(Math.random() * 1000000) + 15000000;
-            
-            console.log('Recording to blockchain:', {
-                data,
-                txHash,
-                blockNumber,
-                timestamp: new Date().toISOString()
+            const response = await fetch('/api/blockchain/record', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
             });
             
-            // Simulate network delay
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            const result = await response.json();
             
-            this.showNotification('Data recorded on blockchain successfully!', 'success');
-            
-            return {
-                txHash,
-                blockNumber,
-                timestamp: new Date().toISOString()
-            };
+            if (result.success) {
+                this.showNotification('Data recorded on blockchain successfully!', 'success');
+                return result;
+            } else {
+                throw new Error(result.error || 'Blockchain transaction failed');
+            }
             
         } catch (error) {
             console.error('Blockchain error:', error);
