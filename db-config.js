@@ -1,5 +1,6 @@
-// MongoDB Database Configuration
-const API_BASE_URL = '/api';
+// MongoDB Atlas Configuration
+const MONGODB_URI = 'mongodb+srv://ayurtrace_mongodb:<db_password>@ayurtrace.u5ikwdo.mongodb.net/?retryWrites=true&w=majority&appName=AyurTrace';
+const API_BASE_URL = 'http://localhost:9999/api'; // Local server URL
 
 class DatabaseAPI {
     // User operations

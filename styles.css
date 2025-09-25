@@ -526,6 +526,11 @@ body {
     display: none !important;
 }
 
+/* Ensure navigation links are visible by default */
+.nav-menu a {
+    display: inline-block;
+}
+
 /* Ensure only one dashboard link */
 .nav-menu a[href*="dashboard"]:not(#dashboardLink),
 .nav-menu a:not(#dashboardLink)[id*="dashboard"] {

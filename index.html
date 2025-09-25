@@ -14,9 +14,8 @@
             <div class="nav-menu">
                 <a href="index.html">Home</a>
                 <a href="#about">About</a>
-                <a href="#" id="dashboardLink" class="hidden">Dashboard</a>
-                <a href="login.html" id="loginLink">Login</a>
-                <a href="#" id="logoutLink" class="hidden" onclick="logout()">Logout</a>
+                <a href="#" id="dashboardLink">Dashboard</a>
+                <a href="login.html" id="authLink" onclick="handleAuthClick(event)">Login</a>
             </div>
         </div>
     </nav>
@@ -106,6 +105,7 @@
     <script src="db-config.js"></script>
     <script src="qr-scanner.js"></script>
     <script src="app.js"></script>
+    <script src="ai-assistant.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Always force page to load at top (Home section)
@@ -115,24 +115,22 @@
                 history.replaceState(null, null, window.location.pathname);
             }
             
+            updateNavigation();
+        });
+        
+        function updateNavigation() {
             const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
             const userRole = localStorage.getItem('userRole');
             
-            // Remove any duplicate dashboard links
-            const allDashboardLinks = document.querySelectorAll('a[href*="dashboard"], a[id*="dashboard"]');
-            allDashboardLinks.forEach((link, index) => {
-                if (index > 0 || link.id !== 'dashboardLink') {
-                    link.remove();
-                }
-            });
-            
+            const authLink = document.getElementById('authLink');
             const dashboardLink = document.getElementById('dashboardLink');
             
-            if (isLoggedIn && dashboardLink) {
-                document.getElementById('loginLink').classList.add('hidden');
-                document.getElementById('logoutLink').classList.remove('hidden');
-                dashboardLink.classList.remove('hidden');
+            if (isLoggedIn) {
+                // User is logged in - change to Logout
+                authLink.textContent = 'Logout';
+                authLink.href = '#';
                 
+                // Set dashboard link based on user role
                 switch(userRole) {
                     case 'processor':
                         dashboardLink.href = 'processor-dashboard.html';
@@ -149,8 +147,31 @@
                     default:
                         dashboardLink.href = 'login.html';
                 }
+            } else {
+                // User is not logged in - show Login
+                authLink.textContent = 'Login';
+                authLink.href = 'login.html';
+                dashboardLink.href = 'login.html';
             }
-        });
+        }
+        
+        function handleAuthClick(event) {
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            
+            if (isLoggedIn) {
+                // User is logged in, perform logout
+                event.preventDefault();
+                logout();
+            }
+            // If not logged in, let the link navigate to login.html
+        }
+        
+        function logout() {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userRole');
+            localStorage.removeItem('username');
+            window.location.href = 'login.html';
+        }
     </script>
 </body>
 </html>
