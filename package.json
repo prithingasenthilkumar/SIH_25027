@@ -1,11 +1,7 @@
 {
   "name": "ayurtrace",
   "version": "1.0.0",
-<<<<<<< HEAD
-  "description": "Blockchain-based Ayurvedic herb traceability system",
-=======
   "description": "AyurTrace - Ayurvedic Herb Traceability System",
->>>>>>> 713115b7710eead0c05f2340a5f742f1bf587bae
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

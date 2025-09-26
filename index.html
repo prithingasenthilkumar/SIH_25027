@@ -4,99 +4,319 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AyurTrace - Blockchain Herb Traceability</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="hero-clean.css">
+    <link rel="stylesheet" href="premium-header-footer.css">
+    <link rel="stylesheet" href="bg-override.css">
+    <link rel="stylesheet" href="text-override.css">
     <link rel="manifest" href="manifest.json">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'ayur-green': '#16a34a',
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">🌿 AyurTrace</div>
-            <div class="nav-menu">
-                <a href="index.html">Home</a>
-                <a href="#about">About</a>
-                <a href="#" id="dashboardLink">Dashboard</a>
-                <a href="login.html" id="authLink" onclick="handleAuthClick(event)">Login</a>
+    <!-- Premium Header -->
+    <header class="premium-header">
+        <nav class="premium-nav">
+            <div class="nav-brand">
+                <div class="brand-icon">🌿</div>
+                <div class="brand-text">
+                    <span class="brand-name">AyurTrace</span>
+                    <span class="brand-tagline">Blockchain Verified</span>
+                </div>
             </div>
-        </div>
-    </nav>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="verify.html" class="nav-link">Verify</a>
+                <a href="#" id="dashboardLink" class="nav-link">Dashboard</a>
+                <a href="login.html" id="authLink" class="nav-btn" onclick="handleAuthClick(event)">Login</a>
+            </div>
+        </nav>
+    </header>
 
     <main>
-        <section id="home" class="hero">
-            <div class="hero-content">
-                <h1>Blockchain-Powered Ayurvedic Herb Traceability</h1>
-                <p>Verify the authenticity and journey of your Ayurvedic herbs from farm to pharmacy</p>
-                
-                <div class="qr-scanner">
-                    <h2>Scan QR Code</h2>
-                    <div class="scanner-container">
-                        <video id="qr-video" autoplay></video>
-                        <div id="qr-result" class="hidden"></div>
-                    </div>
-                    <button id="start-scan" class="btn-primary">Start Scanning</button>
-                    <input type="file" id="qr-file" accept="image/*" class="hidden">
-                    <button id="upload-qr" class="btn-secondary">Upload QR Image</button>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-left">
+                <h1 class="headline">
+                    Revolutionize <span class="highlight">Ayurvedic</span> Supply Chain
+                </h1>
+                <p class="subtext">
+                    Blockchain-powered transparency from farm to pharmacy. Verify authenticity, ensure quality, preserve heritage.
+                </p>
+                <div class="cta-buttons">
+                    <button class="btn-primary" onclick="window.location.href='verify.html'">Verify Product</button>
+                    <button class="btn-secondary" onclick="window.location.href='#about'">View Analytics</button>
                 </div>
+                <div class="stats">
+                    <div class="stat">
+                        <span class="stat-number">50K+</span>
+                        <span class="stat-label">Products Tracked</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">99.9%</span>
+                        <span class="stat-label">Accuracy</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">156</span>
+                        <span class="stat-label">Verified Farms</span>
+                    </div>
+                </div>
+            </div>
 
-                <div class="features">
-                    <div class="feature-card">
-                        <h3>🔍 Full Traceability</h3>
-                        <p>Track herbs from seed to shelf</p>
+            <div class="hero-right">
+                <div class="tracking-card">
+                    <div class="card-header">
+                        <h3 class="card-title">🔴 Live Tracking</h3>
+                        <div class="blockchain-badge">⛓️ Blockchain</div>
                     </div>
-                    <div class="feature-card">
-                        <h3>🛡️ Blockchain Security</h3>
-                        <p>Immutable records you can trust</p>
+                    
+                    <div class="tracking-flow">
+                        <div class="stage completed">
+                            <div class="stage-icon">🌱</div>
+                            <span class="stage-label">Farm</span>
+                        </div>
+                        <div class="connector completed"></div>
+                        
+                        <div class="stage completed">
+                            <div class="stage-icon">⚙️</div>
+                            <span class="stage-label">Process</span>
+                        </div>
+                        <div class="connector completed"></div>
+                        
+                        <div class="stage active">
+                            <div class="stage-icon">🧪</div>
+                            <span class="stage-label">Lab Test</span>
+                        </div>
+                        <div class="connector"></div>
+                        
+                        <div class="stage">
+                            <div class="stage-icon">📦</div>
+                            <span class="stage-label">Package</span>
+                        </div>
                     </div>
-                    <div class="feature-card">
-                        <h3>🌱 Sustainability</h3>
-                        <p>Verify eco-friendly practices</p>
+                    
+                    <div class="trust-score">
+                        <div class="score-circle">98.5%</div>
+                        <div class="score-info">
+                            <h4>Trust Score</h4>
+                            <p>✓ Blockchain Verified</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Features Showcase -->
+        <section class="features-showcase">
+            <div class="container mx-auto px-6 py-20">
+                <div class="text-center mb-16">
+                    <h2 class="section-title">Why Choose AyurTrace?</h2>
+                    <p class="section-subtitle">Revolutionary blockchain technology meets ancient Ayurvedic wisdom</p>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card-modern">
+                        <div class="feature-icon">🔒</div>
+                        <h3>Immutable Records</h3>
+                        <p>Every transaction is permanently recorded on blockchain, ensuring complete transparency and preventing fraud.</p>
+                        <div class="feature-stats">
+                            <span class="stat-highlight">100% Secure</span>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card-modern">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Real-time Tracking</h3>
+                        <p>Monitor your products journey from farm to pharmacy with live updates and instant notifications.</p>
+                        <div class="feature-stats">
+                            <span class="stat-highlight">Live Updates</span>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card-modern">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Quality Assurance</h3>
+                        <p>AI-powered quality checks and lab certifications ensure only the finest Ayurvedic products reach consumers.</p>
+                        <div class="feature-stats">
+                            <span class="stat-highlight">99.9% Accuracy</span>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card-modern">
+                        <div class="feature-icon">🌍</div>
+                        <h3>Global Compliance</h3>
+                        <p>Meet international standards and regulations with automated compliance checking and reporting.</p>
+                        <div class="feature-stats">
+                            <span class="stat-highlight">ISO Certified</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="about" class="about">
-            <div class="container">
-                <h2>How It Works</h2>
-                <div class="process-steps">
-                    <a href="harvest.html" class="step-link">
-                        <div class="step clickable-step">
-                            <div class="step-number">1</div>
-                            <h3>Harvest</h3>
-                            <p>Farmers record harvest data on blockchain</p>
-                            <div class="step-arrow">→</div>
-                        </div>
-                    </a>
-                    <a href="process.html" class="step-link">
-                        <div class="step clickable-step">
-                            <div class="step-number">2</div>
-                            <h3>Process</h3>
-                            <p>Processing steps tracked and verified</p>
-                            <div class="step-arrow">→</div>
-                        </div>
-                    </a>
-                    <a href="test.html" class="step-link">
-                        <div class="step clickable-step">
-                            <div class="step-number">3</div>
-                            <h3>Test</h3>
-                            <p>Lab certificates uploaded to blockchain</p>
-                            <div class="step-arrow">→</div>
-                        </div>
-                    </a>
-                    <a href="verify.html" class="step-link">
-                        <div class="step clickable-step">
-                            <div class="step-number">4</div>
-                            <h3>Verify</h3>
-                            <p>Consumers scan QR for full provenance</p>
-                        </div>
-                    </a>
+        <!-- Interactive Process Section -->
+        <section id="about" class="process-section">
+            <div class="container mx-auto px-6 py-20">
+                <div class="text-center mb-16">
+                    <h2 class="section-title">Complete Supply Chain Journey</h2>
+                    <p class="section-subtitle">Experience transparency at every step with blockchain technology</p>
+                </div>
+                
+                <div class="process-timeline">
+                    <div class="timeline-line"></div>
+                    
+                    <div class="process-step" data-step="1">
+                        <a href="harvest.html" class="step-link-modern">
+                            <div class="step-circle">
+                                <span class="step-icon">🌱</span>
+                                <div class="step-ripple"></div>
+                            </div>
+                            <div class="step-content">
+                                <div class="step-badge">Step 1</div>
+                                <h3>Farm & Harvest</h3>
+                                <p>Farmers record cultivation data, soil conditions, and harvest details directly on blockchain</p>
+                                <div class="step-features">
+                                    <span class="feature-tag">GPS Tracking</span>
+                                    <span class="feature-tag">Soil Analysis</span>
+                                    <span class="feature-tag">Weather Data</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <div class="process-step" data-step="2">
+                        <a href="process.html" class="step-link-modern">
+                            <div class="step-circle">
+                                <span class="step-icon">⚙️</span>
+                                <div class="step-ripple"></div>
+                            </div>
+                            <div class="step-content">
+                                <div class="step-badge">Step 2</div>
+                                <h3>Processing & Manufacturing</h3>
+                                <p>Every processing step is monitored and recorded with temperature, humidity, and time stamps</p>
+                                <div class="step-features">
+                                    <span class="feature-tag">IoT Sensors</span>
+                                    <span class="feature-tag">Time Tracking</span>
+                                    <span class="feature-tag">Quality Control</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <div class="process-step" data-step="3">
+                        <a href="test.html" class="step-link-modern">
+                            <div class="step-circle">
+                                <span class="step-icon">🧪</span>
+                                <div class="step-ripple"></div>
+                            </div>
+                            <div class="step-content">
+                                <div class="step-badge">Step 3</div>
+                                <h3>Laboratory Testing</h3>
+                                <p>Comprehensive lab analysis with digital certificates stored immutably on blockchain</p>
+                                <div class="step-features">
+                                    <span class="feature-tag">Purity Tests</span>
+                                    <span class="feature-tag">Potency Analysis</span>
+                                    <span class="feature-tag">Safety Checks</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <div class="process-step" data-step="4">
+                        <a href="verify.html" class="step-link-modern">
+                            <div class="step-circle">
+                                <span class="step-icon">✅</span>
+                                <div class="step-ripple"></div>
+                            </div>
+                            <div class="step-content">
+                                <div class="step-badge">Step 4</div>
+                                <h3>Consumer Verification</h3>
+                                <p>Scan QR code to access complete product journey and verify authenticity instantly</p>
+                                <div class="step-features">
+                                    <span class="feature-tag">QR Scanner</span>
+                                    <span class="feature-tag">Full History</span>
+                                    <span class="feature-tag">Instant Verify</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Interactive Demo -->
+                <div class="demo-section">
+                    <div class="demo-card">
+                        <h3>🎯 Try Our Live Demo</h3>
+                        <p>Experience the power of blockchain traceability with our interactive demo</p>
+                        <button class="demo-btn" onclick="startDemo()">
+                            <span>🚀 Start Demo</span>
+                            <div class="btn-glow"></div>
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 AyurTrace. Securing Ayurvedic Heritage with Blockchain.</p>
+    <!-- Premium Footer -->
+    <footer class="premium-footer">
+        <div class="footer-content">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <span class="logo-icon">🌿</span>
+                        <span class="logo-text">AyurTrace</span>
+                    </div>
+                    <p class="footer-desc">Revolutionizing Ayurvedic supply chain with blockchain technology. Ensuring authenticity, quality, and heritage preservation.</p>
+                    <div class="footer-badges">
+                        <span class="badge">⛓️ Blockchain Verified</span>
+                        <span class="badge">🔒 100% Secure</span>
+                        <span class="badge">🌱 Eco-Friendly</span>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Platform</h4>
+                        <a href="verify.html">Verify Products</a>
+                        <a href="harvest.html">Farm Dashboard</a>
+                        <a href="process.html">Processing</a>
+                        <a href="test.html">Lab Testing</a>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h4>Company</h4>
+                        <a href="#about">About Us</a>
+                        <a href="#">Careers</a>
+                        <a href="#">Contact</a>
+                        <a href="#">Blog</a>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h4>Resources</h4>
+                        <a href="#">Documentation</a>
+                        <a href="#">API Reference</a>
+                        <a href="#">Support</a>
+                        <a href="#">Privacy Policy</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copy">
+                    <p>&copy; 2024 AyurTrace. All rights reserved. | Powered by Blockchain Technology</p>
+                </div>
+            </div>
         </div>
     </footer>
 
@@ -104,13 +324,9 @@
     <script src="db-config.js"></script>
     <script src="qr-scanner.js"></script>
     <script src="app.js"></script>
-<<<<<<< HEAD
-    <script src="ai-assistant.js"></script>
-=======
     <script src="blockchain-status.js"></script>
     <script src="page-transitions.js"></script>
     <script src="demo-animations.js"></script>
->>>>>>> 713115b7710eead0c05f2340a5f742f1bf587bae
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Always force page to load at top (Home section)
@@ -121,6 +337,7 @@
             }
             
             updateNavigation();
+            initializeAnimations();
         });
         
         function updateNavigation() {
@@ -176,6 +393,36 @@
             localStorage.removeItem('userRole');
             localStorage.removeItem('username');
             window.location.href = 'login.html';
+        }
+        
+        function startDemo() {
+            // Add demo functionality
+            alert('🚀 Demo starting soon! This will showcase the complete blockchain traceability journey.');
+        }
+        
+        function initializeAnimations() {
+            // Add smooth animations on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe feature cards and process steps
+            document.querySelectorAll('.feature-card-modern, .step-content').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'all 0.6s ease';
+                observer.observe(el);
+            });
         }
     </script>
 </body>

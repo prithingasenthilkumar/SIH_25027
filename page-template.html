@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Title - AyurTrace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="premium-header-footer.css">
+    <link rel="stylesheet" href="bg-override.css">
+</head>
+<body>
+    <!-- Header and Footer will be automatically added -->
+    
+    <main style="padding-top: 100px; min-height: 100vh;">
+        <div class="container mx-auto px-6 py-20">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">Page Title</h1>
+            <p class="text-lg text-gray-600">Your page content goes here...</p>
+        </div>
+    </main>
+
+    <!-- Required Scripts -->
+    <script src="common-header-footer.js"></script>
+    <script src="auth.js"></script>
+    <script>
+        // Call updateNavigation after header is loaded
+        setTimeout(updateNavigation, 100);
+    </script>
+</body>
+</html>
