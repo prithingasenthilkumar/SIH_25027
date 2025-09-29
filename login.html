@@ -35,51 +35,13 @@
             <button type="submit" class="btn-primary" style="width: 100%;">Login</button>
             
             <div style="text-align: center; margin-top: 1rem;">
-                <p>Don't have an account? <a href="#" onclick="toggleSignup()" style="color: #4CAF50; text-decoration: none;">Sign Up</a></p>
+                <p style="color: #666; font-size: 0.9rem;">Contact your manager for account creation</p>
                 <a href="index.html" style="color: #4CAF50; text-decoration: none;">← Back to Home</a>
             </div>
         </form>
     </div>
 
-    <!-- Signup Form -->
-    <div class="login-container" id="signupContainer" style="display: none;">
-        <form class="login-form" id="signupForm">
-            <h2>🌿 AyurTrace Sign Up</h2>
-            
-            <div class="form-group">
-                <label for="signupRole">Select Role</label>
-                <select id="signupRole" name="role" required>
-                    <option value="">Choose your role</option>
-                    <option value="processor">Processor</option>
-                    <option value="lab">Laboratory</option>
-                    <option value="manufacturer">Manufacturer</option>
-                    <option value="regulator">Regulator/Manager</option>
-                </select>
-            </div>
 
-            <div class="form-group">
-                <label for="signupUsername">Username</label>
-                <input type="text" id="signupUsername" name="username" required>
-            </div>
-
-            <div class="form-group">
-                <label for="signupEmail">Email</label>
-                <input type="email" id="signupEmail" name="email" required>
-            </div>
-
-            <div class="form-group">
-                <label for="signupPassword">Password</label>
-                <input type="password" id="signupPassword" name="password" required>
-            </div>
-
-            <button type="submit" class="btn-primary" style="width: 100%;">Sign Up</button>
-            
-            <div style="text-align: center; margin-top: 1rem;">
-                <p>Already have an account? <a href="#" onclick="toggleSignup()" style="color: #4CAF50; text-decoration: none;">Login</a></p>
-                <a href="index.html" style="color: #4CAF50; text-decoration: none;">← Back to Home</a>
-            </div>
-        </form>
-    </div>
 
     <script src="db-config.js"></script>
     <script>
@@ -123,41 +85,7 @@
             */
         });
 
-        // Handle signup form submission
-        document.getElementById('signupForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const role = document.getElementById('signupRole').value;
-            const username = document.getElementById('signupUsername').value;
-            const email = document.getElementById('signupEmail').value;
-            const password = document.getElementById('signupPassword').value;
-            
-            try {
-                const result = await DatabaseAPI.signup({ username, email, password, role });
-                
-                if (result.success) {
-                    alert('Account created successfully! Please login.');
-                    toggleSignup();
-                } else {
-                    alert('Signup failed: ' + (result.error || 'Unknown error'));
-                }
-            } catch (error) {
-                alert('Signup failed');
-            }
-        });
 
-        function toggleSignup() {
-            const loginContainer = document.querySelector('.login-container');
-            const signupContainer = document.getElementById('signupContainer');
-            
-            if (loginContainer.style.display === 'none') {
-                loginContainer.style.display = 'flex';
-                signupContainer.style.display = 'none';
-            } else {
-                loginContainer.style.display = 'none';
-                signupContainer.style.display = 'flex';
-            }
-        }
     </script>
 </body>
 </html>
